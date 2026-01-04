@@ -1,0 +1,41 @@
+.browse-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  min-height: 100vh;
+  padding: 3rem 0;
+  background-color: #141414;
+}
+
+.who-is-watching {
+  color: #fff;
+    font-size: 3.5vw;
+    font-weight: unset;
+    width: 100%;
+    text-align: center;
+}
+
+.profiles {
+  /* Fixed-size columns so items stay grouped and centered on large screens */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 140px));
+  gap: 28px;
+  margin-bottom: 3.2rem;
+  justify-content: center;
+  justify-items: center;
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 1rem;
+  box-sizing: border-box;
+}
+
+/* Keep profiles centered and allow wrapping when space is limited. This avoids
+   unpredictable single-item rows while keeping a horizontal layout on wide screens. */
+
+
+@media (max-width: 768px) {
+  .who-is-watching {
+    font-size: 30px;
+  }
+}

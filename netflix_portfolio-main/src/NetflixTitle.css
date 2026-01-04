@@ -1,0 +1,114 @@
+.netflix-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #141414;
+  overflow: hidden;
+}
+
+.netflix-logo {
+  width: 500px;
+  max-width: 80vw;
+  height: auto;
+  opacity: 0;
+  transform: scale(0.8);
+  animation: fadeIn 0.5s forwards ease-in;
+  cursor: pointer;
+}
+
+.netflix-logo-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate.netflix-logo {
+  animation: zoomOut 3s forwards ease-in-out;
+}
+
+@keyframes zoomOut {
+  0%, 80% {
+    transform: scale(0.8);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(3);
+    opacity: 0;
+  }
+}
+
+/* Red split / sweeping light overlay to mimic Netflix intro */
+.netflix-container {
+  position: relative;
+}
+
+.netflix-container::before,
+.netflix-container::after {
+  content: '';
+  position: absolute;
+  top: -10%;
+  left: -40%;
+  width: 60%;
+  height: 120%;
+  background: linear-gradient(90deg, rgba(255,0,0,0) 0%, rgba(255,0,0,0.75) 50%, rgba(255,0,0,0) 100%);
+  transform: skewX(-25deg) translateX(0);
+  mix-blend-mode: screen;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.netflix-container.playing::before {
+  animation: sweep 0.9s ease-in 0s forwards;
+}
+
+.netflix-container.playing::after {
+  animation: sweep 0.9s ease-in 0.35s forwards;
+}
+
+@keyframes sweep {
+  0% {
+    transform: skewX(-25deg) translateX(-10%);
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    transform: skewX(-25deg) translateX(120%);
+    opacity: 0;
+  }
+}
+
+/* Slight glowing edge when animating */
+.netflix-logo.animate {
+  filter: drop-shadow(0 6px 10px rgba(255,0,0,0.08));
+}
+
+/* Name text displayed before the intro animation */
+.netflix-name {
+  font-size: clamp(2rem, 8vw, 6rem);
+  font-weight: 900;
+  color: #e50914;
+  text-align: center;
+  letter-spacing: 0.05em;
+  text-shadow: 0 0 40px rgba(229, 9, 20, 0.6), 0 0 80px rgba(229, 9, 20, 0.3);
+  cursor: pointer;
+  user-select: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.netflix-name.fade {
+  opacity: 0;
+  transform: scale(1.1);
+}

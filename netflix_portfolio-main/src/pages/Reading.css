@@ -1,0 +1,160 @@
+/* Reading.css */
+
+.reading-container {
+  padding: 5rem 2rem;
+  color: #ffffff;
+  text-align: center;
+  background: linear-gradient(135deg, #141414 0%, #1a1a1a 100%);
+  min-height: 100vh;
+}
+
+.reading-title {
+  font-size: 2.5rem;
+  color: #e50914;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.02em;
+  text-shadow: 0 0 20px rgba(229, 9, 20, 0.5);
+}
+
+.reading-intro {
+  font-size: 1.1rem;
+  color: #d2d2d2;
+  margin-bottom: 2rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.books-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Marquee styles */
+.books-marquee { width: 100%; overflow: hidden; box-sizing: border-box; padding: 1rem 0; }
+.marquee-viewport { width: 100%; overflow: hidden; }
+.marquee-track { display: flex; align-items: stretch; gap: 2rem; width: max-content; box-sizing: content-box; animation: marqueeMove var(--duration, 28s) linear infinite; }
+.marquee-item { flex: 0 0 auto; width: 300px; }
+
+.books-section-header { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:8px; }
+.marquee-controls { display:flex; align-items:center; gap:8px; }
+.marquee-toggle { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.06); color: #fff; padding: 6px 10px; border-radius: 6px; cursor: pointer; font-size: 14px; }
+.marquee-toggle[aria-pressed="true"] { background: rgba(255,255,255,0.12); }
+
+@keyframes marqueeMove {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Make marquee accessible for users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none; }
+}
+
+.book-card {
+  background: linear-gradient(145deg, #181818 0%, #1f1f1f 100%);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  transition: transform 0.4s ease, box-shadow 0.4s ease, border 0.4s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+  animation: cardSlideIn 0.6s ease-out forwards;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.book-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #e50914 0%, #b20710 100%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.book-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.7), 0 0 0 2px rgba(229, 9, 20, 0.3);
+  border-color: rgba(229, 9, 20, 0.2);
+}
+
+.book-card:hover::before {
+  opacity: 1;
+}
+
+.book-cover {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.book-card:hover .book-cover {
+  transform: scale(1.05);
+}
+
+.book-info {
+  padding: 1.5rem;
+}
+
+.book-title {
+  font-size: 1.25rem;
+  color: #ffffff;
+  margin: 0.5rem 0;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.book-author {
+  font-size: 1rem;
+  color: #b3b3b3;
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+.book-description {
+  font-size: 0.95rem;
+  color: #d2d2d2;
+  line-height: 1.6;
+  transition: color 0.3s ease;
+}
+
+.book-card:hover .book-description {
+  color: #e50914;
+}
+
+/* Telugu books */
+.book-title:lang(te) {
+  font-family: 'Noto Sans Telugu', sans-serif;
+  color: #ffffff;
+}
+
+.book-card:nth-child(1) { animation-delay: 0.1s; }
+.book-card:nth-child(2) { animation-delay: 0.2s; }
+.book-card:nth-child(3) { animation-delay: 0.3s; }
+.book-card:nth-child(4) { animation-delay: 0.4s; }
+.book-card:nth-child(5) { animation-delay: 0.5s; }
+.book-card:nth-child(6) { animation-delay: 0.6s; }
+/* Section titles for completed/ongoing */
+.books-section { max-width: 1200px; margin: 2rem auto; padding: 0 1rem; }
+.books-section-title { color: #fff; text-align: left; font-size: 1.25rem; margin: 0 0 0.75rem 6px; font-weight: 700; }
+
+
+@keyframes cardSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

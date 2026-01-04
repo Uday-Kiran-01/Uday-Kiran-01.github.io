@@ -1,0 +1,57 @@
+/* Clean neutral WorkExperience timeline CSS */
+.vertical-timeline-element-content {
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  color: inherit;
+  background: #fff; /* default neutral card background */
+}
+
+.vertical-timeline-element-content:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+}
+
+.timeline-container {
+  text-align: center;
+  padding: 20px;
+  margin-top: 5rem;
+}
+
+.timeline-title {
+  font-size: 2rem;
+  color: #fff;
+  font-weight: 700;
+  margin-bottom: 40px;
+  display: inline-block;
+  text-align: center;
+  animation: fadeInUp 1.6s ease-in-out both;
+}
+
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+.timeline-card { cursor: default; position: relative; padding: 18px 56px 18px 18px; overflow: visible; }
+
+.read-more { background: transparent; border: none; color: #333; font-size: 14px; position: absolute; right: 12px; bottom: 12px; cursor: pointer; width: 28px; height: 22px; display: flex; align-items: center; justify-content: center; }
+.read-more:focus { outline: 2px solid rgba(0,0,0,0.06); }
+
+.summary-preview { margin-top: 8px; color: #222; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 15px; }
+
+/* hide preview when the card is expanded (use parent class) */
+.timeline-card.expanded .summary-preview { display: none; }
+
+/* collapsed: hide the full list so only preview shows */
+.summary-list.collapsed { display: none; max-height: 0; opacity: 0; }
+
+/* Removed .timeline-courses-label to simplify education cards */
+
+.summary-list { display: block; margin: 8px 0 0 18px; color: inherit; transition: max-height 260ms ease, opacity 180ms ease; overflow: hidden; max-height: 800px; opacity: 1; }
+.summary-list.expanded { max-height: 800px; opacity: 1; }
+.summary-list ul { margin: 0 0 0 24px; color: inherit; display: block; padding-left: 0; list-style-position: outside; }
+.summary-list li { display: list-item; margin-bottom: 12px; line-height: 1.6; white-space: normal; }
+
+.vertical-timeline-element--work .vertical-timeline-element-content,
+.vertical-timeline-element--education .vertical-timeline-element-content { border-radius: 4px; }
+
+.vertical-timeline-element-date {
+  color: #ffffff !important;
+  opacity: 1;
+}

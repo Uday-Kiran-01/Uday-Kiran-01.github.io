@@ -1,0 +1,130 @@
+.app-footer {
+  background-color: rgba(0, 0, 0, 0.9);
+  padding: 1.5rem 1rem; /* symmetric padding so content can be centered */
+  margin-top: 4rem;
+  margin-bottom: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center; /* center children top-to-bottom */
+  justify-content: center;
+}
+
+/* a full-width black spacer below the footer so the gap matches footer color */
+.app-footer::after {
+  /* keep no extra spacer so visual center is true */
+  content: '';
+  display: block;
+  height: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+.app-footer { box-sizing: border-box; overflow-x: hidden; }
+
+
+.footer-content {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* name left, center made-with, badge right */
+  gap: 1rem;
+  padding: 0 1rem;
+}
+
+.footer-left, .footer-right, .footer-center { display: flex; align-items: center; z-index: 1; flex: 1 1 auto; }
+
+.footer-divider {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 1px;
+  height: 32px;
+  background: rgba(255,255,255,0.06);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.footer-center { justify-content: center; }
+
+.footer-center .footer-text { text-align: center; }
+
+/* tighten spacing to match screenshot */
+.footer-left { justify-content: flex-start; }
+.footer-right { justify-content: flex-end; }
+
+.footer-text {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
+  margin: 0;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+}
+
+.carbon-section {
+  display: flex;
+  flex: 1 1 auto; /* allow carbon section to grow and fill available space */
+  justify-content: flex-end; /* push badge to the right edge of the content area */
+  align-items: center;
+  gap: 10px;
+}
+
+/* Prevent the injected Website Carbon badge from constraining flex layout
+   Make the carbon badge and its fallback not grow the flex item and allow
+   the parent to control spacing. Also allow the badge to be auto width. */
+.carbon-section > *, .carbon-fallback a, #wcb, .carbonbadge {
+  flex: 0 0 auto !important;
+  width: auto !important;
+  max-width: none !important;
+}
+
+/* ensure the carbon section can shrink if needed but doesn't force a minimum width */
+.carbon-section { min-width: 0; }
+
+.carbon-fallback a {
+  color: rgba(255,255,255,0.85);
+  text-decoration: none;
+  font-size: 0.9rem;
+  border: 1px solid rgba(255,255,255,0.06);
+  padding: 6px 10px;
+  border-radius: 6px;
+}
+
+/* Make the fallback badge/button align vertically with the left text */
+.carbon-fallback a, .carbonbadge, #wcb { display: inline-flex; align-items: center; }
+.carbon-fallback a { height: 36px; }
+
+/* Website Carbon Badge overrides for better integration */
+#wcb.carbonbadge {
+  margin: 0;
+}
+
+/* Responsive design */
+@media (min-width: 768px) {
+  .footer-section {
+    text-align: center;
+  }
+
+  /* ensure both sides vertically center their children */
+  .footer-content > .footer-section, .footer-content > .carbon-section { display: flex; align-items: center; }
+}
+
+/* ensure text baseline and badge size are consistent */
+.footer-text { line-height: 1.1; }
+
+/* small override to keep the Website Carbon badge compact inside footer */
+#wcb.carbonbadge, .carbonbadge { transform: none !important; vertical-align: middle; }
+
+@media (max-width: 480px) {
+  .app-footer {
+    padding: 1.5rem 1rem;
+    margin-top: 2rem;
+  }
+
+  .footer-text {
+    font-size: 0.8rem;
+  }
+}

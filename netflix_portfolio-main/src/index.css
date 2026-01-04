@@ -1,0 +1,24 @@
+body {
+  margin: 0;
+  font-family: 'Netflix Sans',Helvetica Neue,Segoe UI,Roboto,Ubuntu,sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #141414;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+/* Dark selection (prefer subtle dark highlight rather than default blue) */
+::selection {
+  background: #222;
+  color: #fff;
+}
+
+/* Firefox */
+::-moz-selection {
+  background: #222;
+  color: #fff;
+}

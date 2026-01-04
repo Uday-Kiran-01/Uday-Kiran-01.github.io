@@ -1,0 +1,425 @@
+/* Youtube.css */
+
+/* Constrain page content and center the main heading above the video */
+.youtube-page {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 80px 20px 20px 20px;
+  /* prevent accidental horizontal overflow on this page */
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+.blogs-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  padding: 2rem;
+}
+
+.youtube-title {
+  font-size: 2.5rem;
+  color: #e50914;
+  font-weight: 700;
+  margin-bottom: 0.8rem;
+  animation: slideDown 0.7s ease-in-out forwards;
+  transform: translateY(-30px);
+  opacity: 0;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: nowrap;
+}
+
+.youtube-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  background: #e50914;
+  color: #fff;
+  border-radius: 8px;
+  font-size: 0;
+  flex: 0 0 52px;
+  position: relative;
+}
+
+.youtube-icon::before {
+  content: '';
+  width: 0;
+  height: 0;
+  border-left: 14px solid #fff;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  margin-left: 3px;
+}
+
+.youtube-text { display: inline-block; line-height: 1.2; }
+
+.youtube-intro {
+  font-size: 1rem;
+  color: #b3b3b3;
+  margin: 0 auto 2.5rem;
+  max-width: 800px;
+  text-align: center;
+  animation: fadeIn 1s ease-in-out forwards;
+  transform: translateY(-16px);
+  opacity: 0;
+}
+
+/* Ensure links and CTAs are readable (white) against dark background */
+.youtube-page a,
+.youtube-page a:link,
+.youtube-page a:visited {
+  color: #ffffff;
+}
+
+.channel-cta {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+/* Channel card appearance: rounded, roomy, remove subscribe button look */
+.channel-card {
+  border-radius: 12px;
+  padding: 20px;
+  background: linear-gradient(180deg,#141414 0%, #161616 100%);
+  box-shadow: 0 14px 40px rgba(0,0,0,0.6);
+  border: 1px solid rgba(255,255,255,0.03);
+  margin-bottom: 1.5rem;
+  width: 100%;
+  /* visually nudge the channel card slightly left so it aligns closer
+     to the video column (small, non-breaking tweak) */
+  margin-left: -12px;
+}
+.channel-card .blog-icon {
+  width: 56px;
+  height: 56px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background: #e62117; /* youtube red */
+  color: #fff;
+  border-radius: 10px;
+  font-size: 1.35rem;
+  flex: 0 0 56px;
+}
+.channel-card .channel-title { font-size: 1.05rem; font-weight: 800; color: #fff; margin: 0 0 6px 0; }
+.channel-card .channel-sub { color: #cfcfcf; margin: 0 0 8px 0; }
+.channel-card .channel-cta { color: #fff; text-decoration: underline; font-weight:700; margin-top: 10px; display: inline-block; }
+
+.channel-header {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  width: 100%;
+}
+
+/* keep the channel header text on a single line and avoid awkward breaks */
+.channel-card .channel-title,
+.channel-card .channel-sub,
+.channel-card .channel-cta {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ensure the header's text column gets remaining space and can ellipsize */
+.channel-header > div {
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.recommended-section {
+  margin-top: 1.5rem;
+}
+
+/* ensure suggested sub-sections use full width for consistent box sizing */
+.suggested-column .channel-card,
+.suggested-column .recommended-section { width: 100%; }
+
+/* Recommended list tweaks: thumbnails and spacing like YouTube list */
+.suggested-column h4 { color: #fff; margin: 12px 0 1rem 0; font-size: 1.1rem; }
+.suggested-item { display:flex; gap: 12px; align-items:center; margin-bottom: 12px; text-decoration:none; color: inherit; }
+.suggested-thumb img { width: 150px; height: 84px; object-fit: cover; border-radius: 6px; border: 1px solid rgba(255,255,255,0.06); flex-shrink: 0; }
+.suggested-meta .suggested-title { color: #fff; font-weight: 800; font-size: 0.98rem; line-height: 1.4; }
+.suggested-meta .suggested-sub { color: #bdbdbd; font-size: 0.85rem; }
+
+/* Slight spacing so the right column floats visually separate */
+.suggested-column { padding-left: 0; }
+
+.youtube-grid {
+  display: grid;
+  grid-template-columns: 2.5fr 1fr;
+  gap: 3rem;
+  width: 100%;
+  /* vertically center the suggested column alongside the main video */
+  align-items: center;
+}
+
+/* Author header with avatar, name/role and date */
+.blog-card {
+  background: linear-gradient(180deg,#161616 0%, #1a1a1a 100%);
+  border-radius: 12px;
+  padding: 1rem;
+  width: 100%;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  color: #e6e6e6;
+  text-decoration: none;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  animation: popUp 0.35s ease forwards;
+  opacity: 1;
+}
+.blog-card:hover { transform: translateY(-6px); }
+
+/* Video card: show the raw embed without the surrounding dark card box */
+.video-card {
+  background: transparent;
+  box-shadow: none;
+  padding: 0;
+  border-radius: 0;
+  /* ensure the video embed fills the available width without flex gaps */
+  display: block;
+}
+.author-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #e50914; /* red */
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 1.1rem;
+  flex: 0 0 48px;
+}
+.author-meta { display: flex; flex-direction: column; gap: 2px; }
+.author-name { color: #e50914; font-weight: 800; font-size: 1.05rem; }
+.author-role { color: #bdbdbd; font-size: 0.95rem; }
+.post-date { margin-left: auto; color: #d0d0d0; font-size: 0.95rem; }
+
+@media (max-width: 720px) {
+  .blog-header { gap: 10px; }
+  .author-avatar { width: 40px; height: 40px; font-size: 0.95rem; }
+  .post-date { font-size: 0.85rem; }
+  .youtube-title { font-size: 1.5rem; }
+  .youtube-icon { width: 40px; height: 40px; flex: 0 0 40px; }
+  .youtube-icon::before { border-left: 12px solid #fff; border-top: 8px solid transparent; border-bottom: 8px solid transparent; }
+  .youtube-intro { font-size: 0.9rem; }
+}
+
+.blog-card {
+  background: linear-gradient(180deg,#161616 0%, #1a1a1a 100%);
+  border-radius: 12px;
+  padding: 1rem;
+  width: 100%;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  color: #e6e6e6;
+  text-decoration: none;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  animation: popUp 0.35s ease forwards;
+  opacity: 1;
+}
+
+.blog-card:hover { transform: translateY(-6px); }
+
+/* Coming soon card tweaks */
+.blog-card.coming-soon {
+  background: linear-gradient(180deg, #111 0%, #1a1a1a 100%);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.04);
+  display: block;
+  padding: 20px;
+}
+.blog-card.coming-soon .blog-title { color: #fff; }
+.blog-card.coming-soon .blog-description { color: #cfcfcf; }
+.blog-card.coming-soon .blog-platform { color: rgba(255,255,255,0.6); }
+.blog-card.coming-soon:hover { transform: none; box-shadow: none; cursor: default; }
+
+.blog-icon { font-size: 2.2rem; color: #ff0000; }
+
+.animated-icon {
+  animation: pulse 1.5s infinite;
+}
+
+.blog-info { text-align: left; }
+
+.blog-title {
+  font-size: 1.25rem;
+  color: #fff;
+  margin-bottom: 0.35rem;
+  font-weight: 800;
+}
+
+.blog-description { font-size: 0.95rem; color: #c8c8c8; margin-bottom: 0.6rem; }
+
+.blog-platform {
+  font-size: 0.85rem;
+  color: #e50914; /* accent */
+}
+
+/* Responsive video embed - keep original tall height so recommended items align */
+.video-embed { width: 100%; height: 640px; background: #000; border-radius: 6px; overflow: hidden; }
+.video-embed iframe { width: 100%; height: 100%; border: 0; display:block; background: #000; }
+
+.video-section { width: 100%; }
+
+/* Ensure there is clear spacing between the embed and the suggested column.
+   Make the suggested column the same height as the video and distribute
+   the channel card + individual recommended items vertically using
+   space-between so they align alongside the main video. */
+.suggested-column { padding-left: 0; display: flex; flex-direction: column; justify-content: space-between; gap: 0.6rem; height: 640px; }
+
+/* Suggested column children styling */
+.suggested-column { width: 100%; }
+.suggested-column h4, .recommended-heading { color: #e6e6e6; margin: 0 0 6px 0; font-size: 1.1rem; }
+.suggested-item { display:flex; gap: 12px; align-items:center; margin-bottom: 8px; text-decoration:none; color: inherit; }
+.suggested-thumb img { width: 150px; height: 84px; object-fit: cover; border-radius: 6px; }
+.suggested-meta .suggested-title { color: #fff; font-weight: 700; font-size: 0.95rem; }
+
+/* Responsive adjustments */
+@media (max-width: 920px) {
+  .youtube-grid { grid-template-columns: 1fr; }
+  .suggested-column { height: auto; justify-content: flex-start; }
+  .suggested-thumb img { width: 100px; height: 60px; }
+}
+
+/* Channel Highlights Section */
+.channel-highlights {
+  margin-top: 4rem;
+  padding: 3rem 0;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.highlights-title {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 2.5rem;
+  background: linear-gradient(90deg, #e50914 0%, #fff 25%, #fff 50%, #fff 75%, #e50914 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 3s linear infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 0% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.highlights-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.highlight-card {
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+  border-radius: 12px;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  border: 1px solid rgba(229, 9, 20, 0.2);
+  transition: all 0.3s ease;
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+.highlight-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(229, 9, 20, 0.6);
+  box-shadow: 0 8px 30px rgba(229, 9, 20, 0.3);
+}
+
+.highlight-number {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #e50914;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, #e50914 0%, #ff4444 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.highlight-label {
+  font-size: 0.95rem;
+  color: #b3b3b3;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  line-height: 1.5;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 720px) {
+  .highlights-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+  
+  .highlights-title {
+    font-size: 1.5rem;
+  }
+  
+  .highlight-number {
+    font-size: 2rem;
+  }
+  
+  .highlight-label {
+    font-size: 0.85rem;
+  }
+}
+
+/* Animations */
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes popUp {
+  from { opacity: 0; transform: translateY(50px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}

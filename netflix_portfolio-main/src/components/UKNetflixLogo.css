@@ -1,0 +1,19 @@
+.uk-netflix-logo {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* Allow sizing when used as an inline component */
+.uk-netflix-logo.small {
+  width: 120px;
+  height: 28px;
+}
+
+.uk-netflix-logo.large {
+  width: 320px;
+  height: 80px;
+}
+
+svg.uk-netflix-logo {
+  overflow: visible;
+}

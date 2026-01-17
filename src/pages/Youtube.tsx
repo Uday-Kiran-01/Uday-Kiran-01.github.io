@@ -123,7 +123,7 @@ const Youtube: React.FC = () => {
             </div>
           ) : (
             <a className="blog-card" href={CHANNEL_URL} target="_blank" rel="noopener noreferrer">
-              <div className="blog-icon animated-icon"><FaYoutube /></div>
+              <div className="blog-icon animated-icon">{React.createElement(FaYoutube as any)}</div>
               <div className="blog-info animated-text">
                 <h3 className="blog-title">Visit channel</h3>
                 <p className="blog-description">Open the channel page to view latest videos and playlists.</p>
@@ -136,7 +136,7 @@ const Youtube: React.FC = () => {
         <aside className="suggested-column">
             <div className="channel-card blog-card coming-soon">
               <div className="channel-header">
-                <div className="blog-icon"><FaYoutube /></div>
+                <div className="blog-icon">{React.createElement(FaYoutube as any)}</div>
                 <div>
                   <h3 className="channel-title">More videos on the channel</h3>
                   <p className="channel-sub">Visit the channel to browse more uploads and playlists.</p>

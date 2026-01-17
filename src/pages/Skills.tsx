@@ -1,85 +1,45 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import './Skills.css';
-import { getSkills } from '../queries/getSkills';
-import { skillsData as localSkillsData } from '../data/skillsData';
+import { skillsData } from '../data/staticData';
 
-import { FaReact, FaNodeJs, FaAws, FaDocker, FaJava, FaPython, FaChartBar, FaRobot, FaKeyboard, FaDatabase, FaLink, FaTerminal, FaCogs, FaUsers, FaMagic } from 'react-icons/fa';
-import { SiRubyonrails, SiTypescript, SiPostgresql, SiMysql, SiKubernetes, SiGooglecloud, SiSpringboot, SiPhp, SiNetlify, SiHeroku, SiHtml5, SiCss3, SiRabbitmq, SiJavascript, SiAngular, SiBootstrap, SiScikitlearn, SiGithub, SiGit, SiJira, SiJupyter, SiSqlite } from 'react-icons/si';
-import { Skill } from '../types';
+import { FaReact, FaNodeJs, FaAws, FaDocker, FaJava, FaPython, FaHtml5, FaCss3Alt, FaGithub, FaTerminal, FaRobot, FaAngular, FaNetworkWired } from 'react-icons/fa';
+import { SiTypescript, SiPostgresql, SiMysql, SiGooglecloud, SiJavascript, SiBootstrap, SiSqlite, SiJupyter, SiJira, SiScikitlearn, SiPandas, SiApachekafka, SiTensorflow, SiHuggingface, SiOpenai, SiNumpy } from 'react-icons/si';
+import { IconType } from 'react-icons';
 
-const iconMap: { [key: string]: JSX.Element } = {
-  Python: <FaPython />,
-  JavaScript: <SiJavascript />,
-  'HTML5': <SiHtml5 />,
-  'CSS3': <SiCss3 />,
-  SQL: <FaAws />,
-  PostgreSQL: <SiPostgresql />,
-  SQLite: <SiSqlite />,
-  React: <FaReact />,
-  'Node.js': <FaNodeJs />,
-  Angular: <SiAngular />,
-  AngularJS: <SiAngular />,
-  Bootstrap: <SiBootstrap />,
-  'Scikit-learn': <SiScikitlearn />,
-  'Machine Learning': <SiScikitlearn />,
-  'AutoGPT': <FaRobot />,
-  'Generative AI': <FaMagic />,
-  'Prompt Engineering': <FaKeyboard />,
-  'Data Wrangling': <FaDatabase />,
-  'API integration': <FaLink />,
-  'CLI': <FaTerminal />,
-  'Automation': <FaCogs />,
-  'Collaborative Filtering': <FaUsers />,
-  Git: <SiGit />,
-  GitHub: <SiGithub />,
-  'PowerBI': <FaChartBar />,
-  'AWS (EC2, S3)': <FaAws />,
-  Jira: <SiJira />,
-  Jupyter: <SiJupyter />,
-  SiRubyonrails: <SiRubyonrails />,
-  FaNodeJs: <FaNodeJs />,
-  SiSpringboot: <SiSpringboot />,
-  FaJava: <FaJava />,
-  SiPhp: <SiPhp />,
-  FaReact: <FaReact />,
-  SiTypescript: <SiTypescript />,
-  FaAws: <FaAws />,
-  FaDocker: <FaDocker />,
-  SiPostgresql: <SiPostgresql />,
-  SiMysql: <SiMysql />,
-  SiKubernetes: <SiKubernetes />,
-  SiGooglecloud: <SiGooglecloud />,
-  SiHeroku: <SiHeroku />,
-  SiNetlify: <SiNetlify />,
-  SiRabbitmq: <SiRabbitmq />,
+const iconMap: { [key: string]: IconType } = {
+  FaNodeJs: FaNodeJs,
+  FaJava: FaJava,
+  FaReact: FaReact,
+  FaPython: FaPython,
+  FaHtml5: FaHtml5,
+  FaCss3Alt: FaCss3Alt,
+  FaGithub: FaGithub,
+  FaTerminal: FaTerminal,
+  FaRobot: FaRobot,
+  FaAngular: FaAngular,
+  FaNetworkWired: FaNetworkWired,
+  SiTypescript: SiTypescript,
+  FaAws: FaAws,
+  FaDocker: FaDocker,
+  SiPostgresql: SiPostgresql,
+  SiMysql: SiMysql,
+  SiGooglecloud: SiGooglecloud,
+  SiPandas: SiPandas,
+  SiApachekafka: SiApachekafka,
+  SiTensorflow: SiTensorflow,
+  SiHuggingface: SiHuggingface,
+  SiOpenai: SiOpenai,
+  SiNumpy: SiNumpy,
+  SiJavascript: SiJavascript,
+  SiBootstrap: SiBootstrap,
+  SiSqlite: SiSqlite,
+  SiJupyter: SiJupyter,
+  SiJira: SiJira,
+  SiScikitlearn: SiScikitlearn,
 };
 
 
 const Skills: React.FC = () => {
-
-  const [skillsData, setSkillsData] = useState<Skill[]>(() => {
-    // Initialize with local data formatted for display
-    return localSkillsData.map(skill => ({
-      name: skill.name,
-      category: skill.category,
-      description: skill.description,
-      icon: skill.name
-    })) as Skill[];
-  });
-
-  useEffect(() => {
-    async function fetchSkills() {
-      try {
-        const data = await getSkills();
-        setSkillsData(data);
-      } catch (error) {
-        console.log('Using local skills data');
-        // Already set in initial state
-      }
-    }
-
-    fetchSkills();
-  }, []);
 
   const skillsByCategory = skillsData.reduce((acc: any, skill: any) => {
     if (!acc[skill.category]) acc[skill.category] = [];
@@ -87,22 +47,38 @@ const Skills: React.FC = () => {
     return acc;
   }, {});
 
+  // sort skills within each category A->Z
+  Object.keys(skillsByCategory).forEach((cat) => {
+    skillsByCategory[cat].sort((s1: any, s2: any) => (s1.name || '').toString().localeCompare((s2.name || '').toString()));
+  });
+
+  const sortedCategories = Object.keys(skillsByCategory).sort((a: string, b: string) => a.localeCompare(b));
+
 
   return (
     <div className="skills-container">
-      {Object.keys(skillsByCategory).map((category, index) => (
+      <h2 className="skills-title">Skills</h2>
+      {sortedCategories.map((category, index) => (
         <div key={index} className="skill-category">
           <h3 className="category-title">{category}</h3>
           <div className="skills-grid">
             {skillsByCategory[category].map((skill: any, idx: number) => (
               <div key={idx} className="skill-card">
-                <div className="icon">{iconMap[skill.icon] || <FaReact />}</div>
+                <div className="icon">{React.createElement((iconMap[skill.icon] || FaReact) as any)}</div>
                 <h3 className="skill-name">
-                  {skill.name.split('').map((letter: any, i: number) => (
-                    <span key={i} className="letter" style={{ animationDelay: `${i * 0.05}s` }}>
-                      {letter}
-                    </span>
-                  ))}
+                  {(() => {
+                    const name: string = skill.name || '';
+                    // For short single-word names keep per-letter animation, otherwise render normally
+                    if (name.length <= 12 && !name.includes(' ')) {
+                      return name.split('').map((letter: any, i: number) => (
+                        <span key={i} className="letter" style={{ animationDelay: `${i * 0.03}s` }}>
+                          {letter}
+                        </span>
+                      ));
+                    }
+
+                    return <span className="skill-name-text">{name}</span>;
+                  })()}
                 </h3>
                 <p className="skill-description">{skill.description}</p>
               </div>

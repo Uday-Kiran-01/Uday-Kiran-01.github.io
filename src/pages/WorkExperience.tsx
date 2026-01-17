@@ -42,7 +42,7 @@ const WorkExperience: React.FC = () => {
                   ? { background: 'rgb(33, 150, 243)', color: '#fff' }
                   : { background: 'rgb(255, 160, 200)', color: '#fff' } // Softer red for education icon
               }
-            icon={item.timelineType === "work" ? <WorkIcon /> : <SchoolIcon />}
+            icon={item.timelineType === "work" ? React.createElement(WorkIcon as any) : React.createElement(SchoolIcon as any)}
           >
             {item.timelineType === "work" ? (
               <div className={`timeline-card ${expanded[index] ? 'expanded' : ''}`}>
@@ -113,7 +113,7 @@ const WorkExperience: React.FC = () => {
         ))}
         <VerticalTimelineElement
           iconStyle={{ background: 'rgb(16, 204, 82)', color: '#fff' }}
-          icon={<StarIcon />}
+          icon={React.createElement(StarIcon as any)}
         />
         {/* Modal removed — using inline accordion per card instead */}
       </VerticalTimeline>

@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './TopPicksRow.css';
 import { FaPassport, FaCode, FaBriefcase, FaCertificate, FaHandsHelping, FaProjectDiagram, FaEnvelope, FaMusic, FaBook, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import { IconType } from 'react-icons';
 
 type ProfileType = 'recruiter' | 'developer' | 'stalker' | 'adventure';
 
@@ -9,37 +10,44 @@ interface TopPicksRowProps {
   profile: ProfileType;
 }
 
-const topPicksConfig = {
+type PickItem = {
+  title: string;
+  imgSrc: string;
+  route: string;
+  icon?: IconType;
+};
+
+const topPicksConfig: Record<string, PickItem[]> = {
   recruiter: [
-    { title: "Work Permit", imgSrc: "https://picsum.photos/seed/workpermit/250/200", icon: <FaPassport />, route: "/work-permit" },
-    { title: "Skills", imgSrc: "https://picsum.photos/seed/skills/250/200", icon: <FaCode />, route: "/skills" },
-    { title: "Experience", imgSrc: "https://picsum.photos/seed/workexperience/250/200", icon: <FaBriefcase />, route: "/work-experience" },
-    { title: "Certifications", imgSrc: "https://picsum.photos/seed/certifications/250/200", icon: <FaCertificate />, route: "/certifications" },
-    { title: "Recommendations", imgSrc: "https://picsum.photos/seed/recommendations/250/200", icon: <FaHandsHelping />, route: "/recommendations" },
-    { title: "Projects", imgSrc: "https://picsum.photos/seed/projects/250/200", icon: <FaProjectDiagram />, route: "/projects" },
-    { title: "Contact Me", imgSrc: "https://picsum.photos/seed/contact/250/200", icon: <FaEnvelope />, route: "/contact-me" }
+    { title: "Work Permit", imgSrc: "https://picsum.photos/seed/workpermit/250/200", icon: FaPassport, route: "/work-permit" },
+    { title: "Skills", imgSrc: "https://picsum.photos/seed/skills/250/200", icon: FaCode, route: "/skills" },
+    { title: "Experience", imgSrc: "https://picsum.photos/seed/workexperience/250/200", icon: FaBriefcase, route: "/work-experience" },
+    { title: "Certifications", imgSrc: "https://picsum.photos/seed/certifications/250/200", icon: FaCertificate, route: "/certifications" },
+    { title: "Recommendations", imgSrc: "https://picsum.photos/seed/recommendations/250/200", icon: FaHandsHelping, route: "/recommendations" },
+    { title: "Projects", imgSrc: "https://picsum.photos/seed/projects/250/200", icon: FaProjectDiagram, route: "/projects" },
+    { title: "Contact Me", imgSrc: "https://picsum.photos/seed/contact/250/200", icon: FaEnvelope, route: "/contact-me" }
   ],
   developer: [
-    { title: "Skills", imgSrc: "https://picsum.photos/seed/coding/250/200", route: "/skills", icon: <FaCode /> },
-    { title: "Projects", imgSrc: "https://picsum.photos/seed/development/250/200", route: "/projects", icon: <FaProjectDiagram /> },
-    { title: "Certifications", imgSrc: "https://picsum.photos/seed/badge/250/200", route: "/certifications", icon: <FaCertificate /> },
-    { title: "Experience", imgSrc: "https://picsum.photos/seed/work/250/200", route: "/work-experience", icon: <FaBriefcase /> },
-    { title: "Recommendations", imgSrc: "https://picsum.photos/seed/networking/250/200", route: "/recommendations", icon: <FaHandsHelping /> },
-    { title: "Contact Me", imgSrc: "https://picsum.photos/seed/connect/250/200", route: "/contact-me", icon: <FaEnvelope /> }
+    { title: "Skills", imgSrc: "https://picsum.photos/seed/coding/250/200", route: "/skills", icon: FaCode },
+    { title: "Projects", imgSrc: "https://picsum.photos/seed/development/250/200", route: "/projects", icon: FaProjectDiagram },
+    { title: "Certifications", imgSrc: "https://picsum.photos/seed/badge/250/200", route: "/certifications", icon: FaCertificate },
+    { title: "Experience", imgSrc: "https://picsum.photos/seed/work/250/200", route: "/work-experience", icon: FaBriefcase },
+    { title: "Recommendations", imgSrc: "https://picsum.photos/seed/networking/250/200", route: "/recommendations", icon: FaHandsHelping },
+    { title: "Contact Me", imgSrc: "https://picsum.photos/seed/connect/250/200", route: "/contact-me", icon: FaEnvelope }
   ],
   stalker: [
-    { title: "Recommendations", imgSrc: "https://picsum.photos/seed/networking/250/200", route: "/recommendations", icon: <FaHandsHelping /> },
-    { title: "Contact Me", imgSrc: "https://picsum.photos/seed/call/250/200", route: "/contact-me", icon: <FaEnvelope /> },
-    { title: "Projects", imgSrc: "https://picsum.photos/seed/planning/250/200", route: "/projects", icon: <FaProjectDiagram /> },
-    { title: "Experience", imgSrc: "https://picsum.photos/seed/resume/250/200", route: "/work-experience", icon: <FaBriefcase /> },
-    { title: "Certifications", imgSrc: "https://picsum.photos/seed/achievements/250/200", route: "/certifications", icon: <FaCertificate /> },
+    { title: "Recommendations", imgSrc: "https://picsum.photos/seed/networking/250/200", route: "/recommendations", icon: FaHandsHelping },
+    { title: "Contact Me", imgSrc: "https://picsum.photos/seed/call/250/200", route: "/contact-me", icon: FaEnvelope },
+    { title: "Projects", imgSrc: "https://picsum.photos/seed/planning/250/200", route: "/projects", icon: FaProjectDiagram },
+    { title: "Experience", imgSrc: "https://picsum.photos/seed/resume/250/200", route: "/work-experience", icon: FaBriefcase },
+    { title: "Certifications", imgSrc: "https://picsum.photos/seed/achievements/250/200", route: "/certifications", icon: FaCertificate },
   ],
   adventure: [
-    { title: "Music", imgSrc: "https://picsum.photos/seed/music/250/200", route: "/music", icon: <FaMusic /> },
-    { title: "Projects", imgSrc: "https://picsum.photos/seed/innovation/250/200", route: "/projects", icon: <FaProjectDiagram /> },
-    { title: "Reading", imgSrc: "https://picsum.photos/seed/books/250/200", route: "/reading", icon: <FaBook /> },
-    { title: "Contact Me", imgSrc: "https://picsum.photos/seed/connect/250/200", route: "/contact-me", icon: <FaEnvelope /> },
-    { title: "Certifications", imgSrc: "https://picsum.photos/seed/medal/250/200", route: "/certifications", icon: <FaCertificate /> }
+    { title: "Music", imgSrc: "https://picsum.photos/seed/music/250/200", route: "/music", icon: FaMusic },
+    { title: "Projects", imgSrc: "https://picsum.photos/seed/innovation/250/200", route: "/projects", icon: FaProjectDiagram },
+    { title: "Reading", imgSrc: "https://picsum.photos/seed/books/250/200", route: "/reading", icon: FaBook },
+    { title: "Contact Me", imgSrc: "https://picsum.photos/seed/connect/250/200", route: "/contact-me", icon: FaEnvelope },
+    { title: "Certifications", imgSrc: "https://picsum.photos/seed/medal/250/200", route: "/certifications", icon: FaCertificate }
   ]
 };
 
@@ -152,7 +160,7 @@ const TopPicksRow: React.FC<TopPicksRowProps> = ({ profile }) => {
       <div className="row-container">
         {shouldShowArrows && visibleArrow === 'left' && (
           <button className="scroll-arrow left-arrow" onClick={() => scroll('left')}>
-            <FaChevronLeft />
+            {React.createElement(FaChevronLeft as any)}
           </button>
         )}
         <div className="card-row" ref={rowRef}>
@@ -171,7 +179,7 @@ const TopPicksRow: React.FC<TopPicksRowProps> = ({ profile }) => {
         </div>
         {shouldShowArrows && visibleArrow === 'right' && (
           <button className="scroll-arrow right-arrow" onClick={() => scroll('right')}>
-            <FaChevronRight />
+            {React.createElement(FaChevronRight as any)}
           </button>
         )}
       </div>

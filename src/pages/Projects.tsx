@@ -1,81 +1,31 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import './Projects.css';
-import { FaReact, FaNodeJs, FaAws, FaDatabase, FaDocker, FaAngular, FaGithub, FaGitlab, FaGoogle, FaJava, FaJenkins, FaMicrosoft, FaPython, FaVuejs } from 'react-icons/fa';
-import { SiRubyonrails, SiPostgresql, SiMongodb, SiMaterialdesign, SiHtml5, SiCss3, SiJquery, SiAwsamplify, SiFirebase, SiTerraform, SiArgo, SiKubernetes, SiApachekafka } from 'react-icons/si';
-import { Project } from '../types';
-import { getProjects } from '../queries/getProjects';
-import { GrDeploy } from "react-icons/gr";
+import { FaReact, FaNodeJs, FaAws, FaDocker, FaJava, FaPython } from 'react-icons/fa';
+import { SiPostgresql, SiMongodb, SiTypescript, SiApachekafka } from 'react-icons/si';
+import { IconType } from 'react-icons';
+import { projectsData } from '../data/staticData';
 
-const techIcons: { [key: string]: JSX.Element } = {
-  "ReactJS": <FaReact />,
-  "NodeJS": <FaNodeJs />,
-  "AWS": <FaAws />,
-  "PostgreSQL": <SiPostgresql />,
-  "MongoDB": <SiMongodb />,
-  "Ruby On Rails": <SiRubyonrails />,
-  "Material UI": <SiMaterialdesign />,
-  "HTML5": <SiHtml5 />,
-  "CSS3": <SiCss3 />,
-  "jQuery": <SiJquery />,
-  "AWS-ECS": <SiAwsamplify />,
-  'Cognito': <FaAws />,
-  'Lambda': <FaAws />,
-  'ECS': <FaAws />,
-  'Jenkins': <FaJenkins />,
-  'Docker': <FaDocker />,
-  'APIs': <FaDatabase />, 
-  'CI/CD': <FaGitlab />,
-  'GitLab': <FaGitlab />,
-  'GitHub': <FaGithub />,
-  'Heroku': <GrDeploy />,
-  'Netlify': <GrDeploy />,
-  'Firebase': <SiFirebase />,
-  'GCP': <FaGoogle />,
-  'Azure': <FaMicrosoft />,
-  'Kubernetes': <SiKubernetes />,
-  'Terraform': <SiTerraform />,
-  'ArgoCD': <SiArgo />,
-  'Java': <FaJava />,
-  'Spring Boot': <FaJava />,
-  'Python': <FaPython />,
-  'Node.js': <FaNodeJs />,
-  'Express.js': <FaNodeJs />,
-  'Hibernate': <FaJava />,
-  'Maven': <FaJava />,
-  'Gradle': <FaJava />,
-  'JUnit': <FaJava />,
-  'Mockito': <FaJava />,
-  'Jest': <FaReact />,
-  'React': <FaReact />,
-  'Angular': <FaAngular />,
-  'Vue.js': <FaVuejs />,
-  'Next.js': <FaReact />,
-  'Gatsby': <FaReact />,
-  'Nuxt.js': <FaVuejs />,
-  'Redux': <FaReact />,
-  'Vuex': <FaVuejs />,
-  'Tailwind CSS': <SiCss3 />,
-  'Bootstrap': <SiCss3 />,
-  'JQuery': <SiJquery />,
+const techIcons: { [key: string]: IconType } = {
+  "ReactJS": FaReact,
+  "React": FaReact,
+  "NodeJS": FaNodeJs,
+  "Node.js": FaNodeJs,
+  "AWS": FaAws,
+  "PostgreSQL": SiPostgresql,
+  "MongoDB": SiMongodb,
+  "Docker": FaDocker,
+  "Python": FaPython,
+  "Machine Learning": FaPython,
+  "Data Analysis": FaPython,
+  "Java": FaJava,
+  "TypeScript": SiTypescript,
+  "JavaScript": FaReact,
+  "Kafka": SiApachekafka,
 };
 
 
 const Projects: React.FC = () => {
-  const [projects, setProjects] = useState<Project[]>([])
-  
-  useEffect(() => { 
-    async function fetchProjects() {
-      try {
-        const data = await getProjects();
-        setProjects(data);
-      } catch (error) {
-        console.log('DatoCMS not available for projects');
-        setProjects([]);
-      }
-    }
-    
-    fetchProjects()
-  }, [])
+  const projects = projectsData;
 
   return (
     <div className="projects-container">
@@ -86,14 +36,14 @@ const Projects: React.FC = () => {
             className="project-card"
             style={{ '--delay': `${index * 0.1}s` } as React.CSSProperties}
           >
-            <img src={project.image.url} alt={project.title} className="project-image" />
+            <img src={project.image.url} alt={project.title} className="project-image" loading="lazy" decoding="async" />
             <div className="project-details">
               <h3>{project.title}</h3>
               <p>{project.description}</p>
               <div className="tech-used">
                 {project.techUsed.split(', ').map((tech, i) => (
                   <span key={i} className="tech-badge">
-                    {techIcons[tech] || "🔧"} {tech}
+                    {techIcons[tech] ? React.createElement(techIcons[tech] as any) : "🔧"} {tech}
                   </span>
                 ))}
               </div>
@@ -103,7 +53,6 @@ const Projects: React.FC = () => {
       </div>
     </div>
   );
-  "Kafka": <SiApachekafka />,
 };
 
 export default Projects;

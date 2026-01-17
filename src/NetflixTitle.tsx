@@ -1,23 +1,19 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState, useRef } from 'react';
 import './NetflixTitle.css';
+import netflixSound from './netflix-sound.mp3';
+import { useNavigate } from 'react-router-dom';
 import ukfornetflix from './images/ukfornetflix.png';
 
 const NetflixTitle = () => {
   const [isClicked, setIsClicked] = useState(false);
   const navigate = useNavigate();
+  const audioRef = useRef<HTMLAudioElement | null>(null);
 
   const handlePlaySound = () => {
-    try {
-      // play if the file exists at runtime (production can provide public/netflix-sound.mp3)
-      const audio = new Audio('/netflix-sound.mp3');
-      audio.play().catch(() => {
-        /* ignore playback errors */
-      });
-    } catch (err) {
-      // ignore if audio isn't available
-    }
-    setIsClicked(true); // Starts animation after clicking
+    const audio = new Audio(netflixSound);
+    audioRef.current = audio;
+    audio.play().catch(error => console.error('Audio play error:', error));
+    setIsClicked(true);
   };
 
   useEffect(() => {
@@ -25,14 +21,20 @@ const NetflixTitle = () => {
       const timer = setTimeout(() => {
         navigate('/browse');
       }, 3000);
-      return () => clearTimeout(timer);
+      return () => {
+        clearTimeout(timer);
+        // Cleanup audio if component unmounts
+        if (audioRef.current) {
+          audioRef.current.pause();
+          audioRef.current = null;
+        }
+      };
     }
   }, [isClicked, navigate]);
 
   return (
-    <div className="netflix-container" onClick={handlePlaySound}>
+    <div className={`netflix-container ${isClicked ? 'playing' : ''}`} onClick={handlePlaySound}>
       <div className={`netflix-logo ${isClicked ? 'animate' : ''}`}>
-        {/* Custom Netflix-style logo with "UDAY KIRAN" */}
         <img 
           src={ukfornetflix} 
           alt="UK for Netflix Logo" 

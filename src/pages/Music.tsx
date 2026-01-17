@@ -1,8 +1,8 @@
 import React from 'react';
 import './Music.css';
-import albumCover1 from '../images/Hotelcalifornia.jpg'; // Hotel California by The Eagles
-import albumCover2 from '../images/ac-dc.jpg'; // Back in Black by AC/DC
-import albumCover3 from '../images/guns-n-roses.webp'; // Appetite for Destruction by Guns N' Roses
+import albumCover1 from '../images/ukfornetflix.png'; // placeholder cover
+import albumCover2 from '../images/my_image.jpg'; // placeholder cover
+import albumCover3 from '../images/blue.png'; // placeholder cover
 
 const favoriteGenres = ["Rock", "Classic Rock", "Hard Rock", "Blues", "Alternative"];
 const favoriteAlbums = [
@@ -34,7 +34,7 @@ const Music: React.FC = () => {
         <div className="albums">
           {favoriteAlbums.map((album, index) => (
             <div key={index} className="album-card" style={{ animationDelay: `${index * 0.3}s` }}>
-              <img src={album.imgSrc} alt={album.title} className="album-image" />
+              <img src={album.imgSrc} alt={album.title} className="album-image" loading="lazy" decoding="async" />
               <div className="album-details">
                 <h4>{album.title}</h4>
                 <p>by {album.artist}</p>

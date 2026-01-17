@@ -2,8 +2,11 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FaHome, FaBriefcase, FaTools, FaProjectDiagram, FaEnvelope } from 'react-icons/fa'; // Import icons
 import './Navbar.css';
-import ukfornetflix from '../images/ukfornetflix.png';
+import navbarLogo from '../images/ukfornetflix.png';
 import blueImage from '../images/blue.png';
+import greyImage from '../images/grey.png';
+import redImage from '../images/red.png';
+import yellowImage from '../images/yellow.png';
 
 const Navbar: React.FC = () => {
   const location = useLocation();
@@ -12,6 +15,29 @@ const Navbar: React.FC = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
   const profileImage = location.state?.profileImage || blueImage;
+  const currentProfileName = location.state?.profileName || '';
+
+  // determine current profile from router state (if just selected) or persisted selection
+  let currentProfile: { name: string; displayName: string; image: string } | null = null;
+  try {
+    const stored = localStorage.getItem('currentProfile');
+    if (stored) currentProfile = JSON.parse(stored);
+  } catch (e) {
+    currentProfile = null;
+  }
+
+  // prefer immediate router state when landing on a profile page
+  if (location.state?.profileImage && location.pathname.startsWith('/profile/')) {
+    const parts = location.pathname.split('/');
+    const pname = parts[2] || 'recruiter';
+    currentProfile = { name: pname, displayName: pname.charAt(0).toUpperCase() + pname.slice(1), image: location.state.profileImage } as any;
+    try { localStorage.setItem('currentProfile', JSON.stringify(currentProfile)); } catch (e) {}
+  }
+
+  // fallback default if nothing available
+  if (!currentProfile) {
+    currentProfile = { name: 'recruiter', displayName: 'Recruiter', image: blueImage };
+  }
   const menuRef = useRef<HTMLDivElement | null>(null);
 
   const handleScroll = () => {
@@ -32,7 +58,6 @@ const Navbar: React.FC = () => {
     setIsProfileMenuOpen((s) => !s);
   };
 
-  // close profile menu when clicking outside
   useEffect(() => {
     const handleDocClick = (e: MouseEvent) => {
       if (isProfileMenuOpen && menuRef.current && !menuRef.current.contains(e.target as Node)) {
@@ -52,13 +77,7 @@ const Navbar: React.FC = () => {
       <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
         <div className="navbar-left">
           <Link to="/" className="navbar-logo">
-            <img 
-              src={ukfornetflix} 
-              alt="UK for Netflix" 
-              className="uk-netflix-logo small"
-              loading="lazy" 
-              decoding="async"
-            />
+            <img src={navbarLogo} alt="UK for Netflix" className="uk-netflix-logo small" loading="lazy" decoding="async" />
           </Link>
           <ul className="navbar-links">
             <li><Link to="/browse">Home</Link></li>
@@ -76,34 +95,40 @@ const Navbar: React.FC = () => {
             <div></div>
           </div>
           <div className="profile-wrapper" ref={menuRef}>
-            {profileImage ? (
-              // clicking toggles menu instead of immediate navigation
-              // keeps existing behavior when menu is closed
-              <img src={profileImage} alt="Profile" className="profile-icon" onClick={toggleProfileMenu} />
-            ) : (
-              <svg className="profile-icon" width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" onClick={toggleProfileMenu}>
-                <circle cx="20" cy="20" r="20" fill="#7da3ff" />
-                <text x="50%" y="54%" textAnchor="middle" fontSize="14" fill="#fff" fontFamily="Arial" dominantBaseline="middle">U</text>
-              </svg>
-            )}
+            <img src={profileImage} alt="Profile" className="profile-icon" loading="lazy" decoding="async" onClick={toggleProfileMenu} />
 
             {isProfileMenuOpen && (
               <div className="profile-menu" role="menu" aria-label="Profile menu">
                 <ul>
-                  <li className="menu-item">ami</li>
-                  <li className="menu-item">Kids</li>
+
+                  <li className="menu-item profile-current">
+                    <img src={currentProfile.image} alt={currentProfile.displayName} className="mini-avatar" />
+                    <span className="menu-label">{currentProfile.displayName}</span>
+                  </li>
+
                   <li className="menu-divider" />
-                  <li className="menu-item">Manage Profiles</li>
-                  <li className="menu-item">Transfer Profile</li>
-                  <li className="menu-item">Account</li>
-                  <li className="menu-item">Help Center</li>
+
+                  <li className="menu-item" onClick={() => { setIsProfileMenuOpen(false); navigate('/browse'); }}>
+                    Manage Profiles
+                  </li>
+
+                  <li className="menu-item" onClick={() => { setIsProfileMenuOpen(false); navigate('/work-experience'); }}>
+                    Account
+                  </li>
+
+                  <li className="menu-item" onClick={() => { setIsProfileMenuOpen(false); navigate('/contact-me'); }}>
+                    Help Center
+                  </li>
+
                   <li className="menu-divider" />
+
                   <li className="menu-item sign-out" onClick={() => {
-                    // placeholder sign out: clear local session and navigate home
                     try { localStorage.clear(); sessionStorage.clear(); } catch (e) {}
                     setIsProfileMenuOpen(false);
                     navigate('/');
-                  }}>Sign out of Netflix</li>
+                  }}>
+                    Sign out of Netflix
+                  </li>
                 </ul>
               </div>
             )}
@@ -117,17 +142,14 @@ const Navbar: React.FC = () => {
       {/* Sidebar (only visible on mobile) */}
       <div className={`sidebar ${isSidebarOpen ? 'open' : ''}`}>
         <div className="sidebar-logo">
-          <svg width="120" height="36" viewBox="0 0 120 36" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Uday Kiran">
-            <rect width="100%" height="100%" fill="#E50914" rx="4" />
-            <text x="50%" y="50%" dominantBaseline="middle" textAnchor="middle" fill="#fff" fontFamily="Arial, Helvetica, sans-serif" fontSize="14">Uday</text>
-          </svg>
+          <img src={navbarLogo} alt="UK for Netflix" className="uk-netflix-logo small" loading="lazy" decoding="async" />
         </div>
         <ul>
-          <li><Link to="/browse" onClick={closeSidebar}><FaHome /> Home</Link></li>
-          <li><Link to="/work-experience" onClick={closeSidebar}><FaBriefcase /> Professional</Link></li>
-          <li><Link to="/skills" onClick={closeSidebar}><FaTools /> Skills</Link></li>
-          <li><Link to="/projects" onClick={closeSidebar}><FaProjectDiagram /> Projects</Link></li>
-          <li><Link to="/contact-me" onClick={closeSidebar}><FaEnvelope /> Hire Me</Link></li>
+          <li><Link to="/browse" onClick={closeSidebar}>{React.createElement(FaHome as any)} Home</Link></li>
+          <li><Link to="/work-experience" onClick={closeSidebar}>{React.createElement(FaBriefcase as any)} Professional</Link></li>
+          <li><Link to="/skills" onClick={closeSidebar}>{React.createElement(FaTools as any)} Skills</Link></li>
+          <li><Link to="/projects" onClick={closeSidebar}>{React.createElement(FaProjectDiagram as any)} Projects</Link></li>
+          <li><Link to="/contact-me" onClick={closeSidebar}>{React.createElement(FaEnvelope as any)} Hire Me</Link></li>
         </ul>
       </div>
     </>

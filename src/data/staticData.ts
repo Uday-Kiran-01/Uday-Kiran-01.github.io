@@ -195,7 +195,7 @@ export const skillsData: Skill[] = [
   // Data Engineering
   { name: 'Data Wrangling', category: 'Data Engineering', description: 'Cleaning & transforming data (ETL Process)', icon: 'SiPandas' },
   { name: 'API integration', category: 'Data Engineering', description: 'RESTful API integration', icon: 'FaNetworkWired' },
-  { name: 'Kafka', category: 'Data Engineering', description: 'Distributed event streaming platform', icon: 'SiApachekafka' },
+  { name: 'Apache Kafka', category: 'Data Engineering', description: 'Distributed event streaming platform', icon: 'SiApachekafka' },
   // Additional frontend / languages / tools
   { name: 'JavaScript', category: 'Frontend', description: 'Language for web development', icon: 'SiJavascript' },
   { name: 'HTML5', category: 'Frontend', description: 'Markup language for the web', icon: 'FaHtml5' },

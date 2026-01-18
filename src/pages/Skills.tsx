@@ -57,7 +57,6 @@ const Skills: React.FC = () => {
 
   return (
     <div className="skills-container">
-      <h2 className="skills-title">Skills</h2>
       {sortedCategories.map((category, index) => (
         <div key={index} className="skill-category">
           <h3 className="category-title">{category}</h3>

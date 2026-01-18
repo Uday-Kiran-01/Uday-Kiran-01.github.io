@@ -80,11 +80,11 @@ const Navbar: React.FC = () => {
             <img src={navbarLogo} alt="UK for Netflix" className="uk-netflix-logo small" loading="lazy" decoding="async" />
           </Link>
           <ul className="navbar-links">
-            <li><Link to="/browse">Home</Link></li>
-            <li><Link to="/work-experience">Professional</Link></li>
-            <li><Link to="/skills">Skills</Link></li>
-            <li><Link to="/projects">Projects</Link></li>
-            <li><Link to="/contact-me">Hire Me</Link></li>
+            <li><Link to="/browse" className={location.pathname === '/browse' ? 'active' : ''}>Home</Link></li>
+            <li><Link to="/work-experience" className={location.pathname === '/work-experience' ? 'active' : ''}>Professional</Link></li>
+            <li><Link to="/skills" className={location.pathname === '/skills' ? 'active' : ''}>Skills</Link></li>
+            <li><Link to="/projects" className={location.pathname === '/projects' ? 'active' : ''}>Projects</Link></li>
+            <li><Link to="/contact-me" className={location.pathname === '/contact-me' ? 'active' : ''}>Hire Me</Link></li>
           </ul>
         </div>
         <div className="navbar-right">

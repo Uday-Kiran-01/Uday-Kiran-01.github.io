@@ -30,7 +30,6 @@ const Projects: React.FC = () => {
   return (
     <div className="projects-container">
       <div className="projects-header">
-        <h2 className="projects-title">🚀 Projects</h2>
         <div className="view-toggle">
           <button 
             className={viewMode === 'grid' ? 'active' : ''}

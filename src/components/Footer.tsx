@@ -52,12 +52,6 @@ const Footer: React.FC = () => {
           <p className="footer-text">© 2026 Uday Kiran Yaddanapudi</p>
         </div>
 
-        <div className="footer-divider" aria-hidden="true"></div>
-
-        <div className="footer-center footer-section">
-          <p className="footer-text">Made with <span style={{color: '#e50914'}}>❤</span> by Uday Kiran</p>
-        </div>
-
         <div className="footer-right footer-section carbon-section">
           <div id="wcb" className="carbonbadge wcb-d" aria-hidden={showFallback}></div>
           {showFallback && (

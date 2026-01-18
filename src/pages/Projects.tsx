@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Projects.css';
 import { FaReact, FaNodeJs, FaAws, FaDocker, FaJava, FaPython } from 'react-icons/fa';
 import { SiPostgresql, SiMongodb, SiTypescript, SiApachekafka } from 'react-icons/si';
@@ -20,20 +20,38 @@ const techIcons: { [key: string]: IconType } = {
   "Java": FaJava,
   "TypeScript": SiTypescript,
   "JavaScript": FaReact,
-  "Kafka": SiApachekafka,
+  "Apache Kafka": SiApachekafka,
 };
 
-
 const Projects: React.FC = () => {
+  const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const projects = projectsData;
 
   return (
     <div className="projects-container">
-      <div className="projects-grid">
+      <div className="projects-header">
+        <h2 className="projects-title">🚀 Projects</h2>
+        <div className="view-toggle">
+          <button 
+            className={viewMode === 'grid' ? 'active' : ''}
+            onClick={() => setViewMode('grid')}
+          >
+            Grid
+          </button>
+          <button 
+            className={viewMode === 'list' ? 'active' : ''}
+            onClick={() => setViewMode('list')}
+          >
+            List
+          </button>
+        </div>
+      </div>
+      
+      <div className={`projects-${viewMode}`}>
         {projects.map((project, index) => (
           <div
             key={index}
-            className="project-card"
+            className={`project-card ${viewMode}`}
             style={{ '--delay': `${index * 0.1}s` } as React.CSSProperties}
           >
             <img src={project.image.url} alt={project.title} className="project-image" loading="lazy" decoding="async" />

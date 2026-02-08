@@ -1,10 +1,9 @@
 .profile-card {
   position: relative;
-  margin: 18px 20px;
+  margin: 8px 12px;
   cursor: pointer;
-  /* square avatar with rounded corners */
-  width: 140px;
-  max-width: 140px;
+  width: 150px;
+  max-width: 150px;
   text-decoration: none;
   display: flex;
   flex-direction: column;
@@ -14,26 +13,20 @@
   border: none;
 }
 
-.profile-name {
-  color: #e5e5e5;
-  text-transform: capitalize;
-}
-
 .image-container {
   position: relative;
-  width: 140px;
-  height: 140px;
+  width: 150px;
+  height: 150px;
   overflow: hidden;
-  border-radius: 12px;
-  margin-bottom: 10px;
+  border-radius: 8px;
   background: transparent;
-  border: none;
-  box-shadow: none;
-  transition: transform 0.12s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .profile-card:hover .image-container {
-  transform: translateY(-3px) scale(1.03);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
 }
 
 .profile-image {
@@ -44,31 +37,26 @@
 }
 
 .profile-name {
-  color: white;
-  display: block;
-  font-size: 14px;
-  line-height: 1.2em;
-  margin: 0.6em 0 0.2em;
-  min-height: 1.2em;
-  overflow: hidden;
-  text-align: center;
-  text-overflow: ellipsis;
+  color: #808080;
+  font-size: 16px;
   font-weight: 400;
+  margin: 8px 0 0 0;
+  text-align: center;
+}
+
+.profile-card:hover .profile-name {
+  color: white;
 }
 
 @media (max-width: 768px) {
-
   .profile-card {
-    flex-wrap: wrap;
-    width: 26vw;
-    height: auto;
-    cursor: pointer;
+    width: 120px;
+    max-width: 120px;
   }
 
   .image-container {
-    width: 22vw;
-    height: 22vw;
-    border-radius: 12px;
+    width: 120px;
+    height: 120px;
   }
 
   .profile-name {

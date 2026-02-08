@@ -12,7 +12,7 @@
 /* image-card layout (large rounded photo with bottom overlay) */
 /* compact image-card: reduced size, no heavy framing */
 .image-card { width: min(420px, 92%); max-width: 420px; position: relative; border-radius: 12px; overflow: hidden; background: transparent; padding: 0; margin: 0 auto; }
-.image-card .card-img { width: 100%; height: auto; display: block; object-fit: cover; border-radius: 8px; }
+.image-card .card-img { width: 100%; height: auto; display: block; object-fit: cover; border-radius: 8px; filter: brightness(1.08) contrast(1.02); }
 
 
 .card-overlay { position: absolute; inset: 0; pointer-events: none; }
@@ -341,3 +341,87 @@
 
 /* small animations */
 @keyframes fadeIn { 0% { opacity: 0 } 100% { opacity: 1 } }
+
+/* Reference-inspired profile card design */
+.profile-info-overlay {
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  bottom: 90px;
+  color: white;
+}
+
+.profile-name-large {
+  font-size: 28px;
+  font-weight: 700;
+  margin: 0 0 12px 0;
+  display: block;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+  line-height: 1.2;
+}
+
+.verified-badge {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4));
+  margin-left: 6px;
+  vertical-align: middle;
+}
+
+.profile-description-large {
+  font-size: 16px;
+  line-height: 1.4;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+}
+
+.profile-stats-overlay {
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  pointer-events: auto;
+}
+
+.icon-btn-overlay {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  color: white;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  font-size: 18px;
+}
+
+.icon-btn-overlay:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+.icon-btn-overlay.email:hover { background: #e50914; }
+.icon-btn-overlay.linkedin:hover { background: #0077B5; }
+.icon-btn-overlay.github:hover { background: #111; }
+.icon-btn-overlay.scholar:hover { background: #4285F4; }
+.icon-btn-overlay.resume:hover { background: rgba(255, 255, 255, 0.95); color: #111; }
+
+.card-overlay::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 50%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.55) 30%, rgba(0, 0, 0, 0.2) 65%, transparent 100%);
+  pointer-events: none;
+}

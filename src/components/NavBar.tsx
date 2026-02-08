@@ -18,7 +18,7 @@ const Navbar: React.FC = () => {
   const currentProfileName = location.state?.profileName || '';
 
   // determine current profile from router state (if just selected) or persisted selection
-  let currentProfile: { name: string; displayName: string; image: string } | null = null;
+  let currentProfile: { name: string; displayName: string; image: string; backgroundGif?: string } | null = null;
   try {
     const stored = localStorage.getItem('currentProfile');
     if (stored) currentProfile = JSON.parse(stored);
@@ -30,13 +30,18 @@ const Navbar: React.FC = () => {
   if (location.state?.profileImage && location.pathname.startsWith('/profile/')) {
     const parts = location.pathname.split('/');
     const pname = parts[2] || 'recruiter';
-    currentProfile = { name: pname, displayName: pname.charAt(0).toUpperCase() + pname.slice(1), image: location.state.profileImage } as any;
+    currentProfile = { 
+      name: pname, 
+      displayName: pname.charAt(0).toUpperCase() + pname.slice(1), 
+      image: location.state.profileImage,
+      backgroundGif: location.state.backgroundGif
+    } as any;
     try { localStorage.setItem('currentProfile', JSON.stringify(currentProfile)); } catch (e) {}
   }
 
   // fallback default if nothing available
   if (!currentProfile) {
-    currentProfile = { name: 'recruiter', displayName: 'Recruiter', image: blueImage };
+    currentProfile = { name: 'recruiter', displayName: 'Recruiter', image: blueImage, backgroundGif: "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExOTZ5eWwwbjRpdWM1amxyd3VueHhteTVzajVjeGZtZGJ1dDc4MXMyNCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9dg/16u7Ifl2T4zYfQ932F/giphy.gif" };
   }
   const menuRef = useRef<HTMLDivElement | null>(null);
 
@@ -80,7 +85,7 @@ const Navbar: React.FC = () => {
             <img src={navbarLogo} alt="UK for Netflix" className="uk-netflix-logo small" loading="lazy" decoding="async" />
           </Link>
           <ul className="navbar-links">
-            <li><Link to="/browse" className={location.pathname === '/browse' ? 'active' : ''}>Home</Link></li>
+            <li><Link to={`/profile/${currentProfile.name}`} state={{ profileImage: currentProfile.image, backgroundGif: currentProfile.backgroundGif }} className={location.pathname.startsWith('/profile/') ? 'active' : ''}>Home</Link></li>
             <li><Link to="/work-experience" className={location.pathname === '/work-experience' ? 'active' : ''}>Professional</Link></li>
             <li><Link to="/skills" className={location.pathname === '/skills' ? 'active' : ''}>Skills</Link></li>
             <li><Link to="/projects" className={location.pathname === '/projects' ? 'active' : ''}>Projects</Link></li>
@@ -145,7 +150,7 @@ const Navbar: React.FC = () => {
           <img src={navbarLogo} alt="UK for Netflix" className="uk-netflix-logo small" loading="lazy" decoding="async" />
         </div>
         <ul>
-          <li><Link to="/browse" onClick={closeSidebar}>{React.createElement(FaHome as any)} Home</Link></li>
+          <li><Link to={`/profile/${currentProfile.name}`} state={{ profileImage: currentProfile.image, backgroundGif: currentProfile.backgroundGif }} onClick={closeSidebar}>{React.createElement(FaHome as any)} Home</Link></li>
           <li><Link to="/work-experience" onClick={closeSidebar}>{React.createElement(FaBriefcase as any)} Professional</Link></li>
           <li><Link to="/skills" onClick={closeSidebar}>{React.createElement(FaTools as any)} Skills</Link></li>
           <li><Link to="/projects" onClick={closeSidebar}>{React.createElement(FaProjectDiagram as any)} Projects</Link></li>

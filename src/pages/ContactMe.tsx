@@ -2,13 +2,12 @@ import React from 'react';
 import './ContactMe.css';
 import { FaPaperPlane, FaFileDownload, FaLinkedin, FaGithub, FaGoogle } from 'react-icons/fa';
 import { ContactMe as IContactMe } from '../types';
-import profileImg from '../images/my_image.jpg';
 
 // fallback placeholder (external reliable image)
 const PLACEHOLDER_IMAGE = 'https://via.placeholder.com/520x420?text=Uday+Kiran';
 
-// use the exact image the user provided (bundled)
-const BUNDLED_PROFILE = profileImg;
+// use a neutral placeholder for profile image (avoid bundling personal images)
+const BUNDLED_PROFILE = PLACEHOLDER_IMAGE;
 
 const userData: IContactMe = {
   profilePicture: { url: BUNDLED_PROFILE },
@@ -41,30 +40,28 @@ const ContactMe: React.FC = () => {
         <img src={effectiveSrc} alt={userData.name} className="card-img" loading="lazy" decoding="async" />
 
         <div className="card-overlay">
-          <div className="overlay-left glass">
-            <h2 className="card-name">{userData.name}</h2>
-            <div className="card-role">{userData.title}</div>
+          <div className="profile-info-overlay">
+            <h2 className="profile-name-large">
+              {userData.name} <img src="/twitter verified.png" alt="verified" className="verified-badge" />
+            </h2>
+            <p className="profile-description-large">{userData.summary}</p>
           </div>
-
-          <div className="overlay-actions minimal">
-            <a className="icon-btn email" href={`mailto:${userData.email}?subject=Hiring%20inquiry`} title="Email" aria-label="Email">
-              {React.createElement(FaPaperPlane as any)}
+          
+          <div className="profile-stats-overlay">
+            <a href={`mailto:${userData.email}`} className="icon-btn-overlay email" title="Email">
+              <FaPaperPlane />
             </a>
-
-            <a className="icon-btn linkedin" href={userData.linkedinLink} target="_blank" rel="noopener noreferrer" title="LinkedIn" aria-label="LinkedIn">
-              {React.createElement(FaLinkedin as any)}
+            <a href={userData.linkedinLink} target="_blank" rel="noopener noreferrer" className="icon-btn-overlay linkedin" title="LinkedIn">
+              <FaLinkedin />
             </a>
-
-            <a className="icon-btn github" href={userData.githubLink} target="_blank" rel="noopener noreferrer" title="GitHub" aria-label="GitHub">
-              {React.createElement(FaGithub as any)}
+            <a href={userData.githubLink} target="_blank" rel="noopener noreferrer" className="icon-btn-overlay github" title="GitHub">
+              <FaGithub />
             </a>
-
-            <a className="icon-btn scholar" href={userData.googleScholarLink} target="_blank" rel="noopener noreferrer" title="Google Scholar" aria-label="Google Scholar">
-              {React.createElement(FaGoogle as any)}
+            <a href={userData.googleScholarLink} target="_blank" rel="noopener noreferrer" className="icon-btn-overlay scholar" title="Google Scholar">
+              <FaGoogle />
             </a>
-
-            <a className="icon-btn resume" href={userData.resumeLink} target="_blank" rel="noopener noreferrer" title="Resume" aria-label="Resume">
-              {React.createElement(FaFileDownload as any)}
+            <a href={userData.resumeLink} target="_blank" rel="noopener noreferrer" className="icon-btn-overlay resume" title="Resume">
+              <FaFileDownload />
             </a>
           </div>
         </div>

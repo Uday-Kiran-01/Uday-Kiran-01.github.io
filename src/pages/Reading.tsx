@@ -8,25 +8,17 @@ const groupByStatus = (list: any[]) => {
   return { completed, ongoing };
 };
 
-const MarqueeBlock: React.FC<{ title: string; items: any[]; duration?: string }> = ({ title, items, duration = '28s' }) => {
-  const repeated = useMemo(() => [...items, ...items], [items]);
+const MarqueeBlock: React.FC<{ title: string; items: any[]; duration?: string }> = ({ title, items, duration = '40s' }) => {
+  const sortedItems = useMemo(() => [...items].sort((a, b) => a.title.localeCompare(b.title)), [items]);
+  const repeated = useMemo(() => {
+    const copies = items.length < 4 ? 6 : 2;
+    return Array(copies).fill(sortedItems).flat();
+  }, [sortedItems, items.length]);
   const [paused, setPaused] = React.useState(false);
   if (!items.length) return null;
   return (
     <section className="books-section">
-      <div className="books-section-header">
-        <h3 className="books-section-title">{title}</h3>
-        <div className="marquee-controls">
-          <button
-            className="marquee-toggle"
-            aria-pressed={paused}
-            onClick={() => setPaused(p => !p)}
-          >
-            {paused ? '▶' : '⏸'}
-          </button>
-        </div>
-      </div>
-      <div className="books-marquee">
+      <div className="books-marquee" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
         <div className="marquee-viewport">
           <div
             className="marquee-track"
@@ -53,7 +45,6 @@ const GridBlock: React.FC<{ title: string; items: any[] }> = ({ title, items }) 
   if (!items.length) return null;
   return (
     <section className="books-section">
-      <h3 className="books-section-title">{title}</h3>
       <div className="books-grid">
         {items.map((book, index) => (
           <div key={index} className="book-card">
@@ -72,46 +63,45 @@ const GridBlock: React.FC<{ title: string; items: any[] }> = ({ title, items }) 
 
 const Reading: React.FC = () => {
   const [viewMode, setViewMode] = useState<'marquee' | 'grid'>('marquee');
-  const [statusFilter, setStatusFilter] = useState<'all' | 'completed' | 'ongoing'>('all');
+  const [statusFilter, setStatusFilter] = useState<'completed' | 'ongoing'>('completed');
   const { completed, ongoing } = groupByStatus(allBooks);
   
-  const filteredBooks = statusFilter === 'completed' ? completed : statusFilter === 'ongoing' ? ongoing : allBooks;
+  const filteredBooks = statusFilter === 'completed' ? completed : ongoing;
   
   return (
     <div className="reading-container">
-      <div className="reading-header">
-        <h2 className="reading-title">📚 Books That I'm Reading</h2>
-        <div className="reading-controls">
-          <div className="status-toggle">
-            <button className={statusFilter === 'all' ? 'active' : ''} onClick={() => setStatusFilter('all')}>All</button>
-            <button className={statusFilter === 'completed' ? 'active' : ''} onClick={() => setStatusFilter('completed')}>Completed</button>
-            <button className={statusFilter === 'ongoing' ? 'active' : ''} onClick={() => setStatusFilter('ongoing')}>Ongoing</button>
+      <div className="intro-section">
+        <h1 className="page-title">📚 Books Shaping My Journey</h1>
+        <p className="page-subtitle">Pages that have influenced and continue to inspire me...</p>
+        
+        <div className="reading-header">
+          <div className={`status-toggle ${statusFilter}`}>
+            <button
+              className={statusFilter === 'completed' ? 'active' : ''}
+              onClick={() => setStatusFilter('completed')}
+            >
+              Completed
+            </button>
+            <button
+              className={statusFilter === 'ongoing' ? 'active' : ''}
+              onClick={() => setStatusFilter('ongoing')}
+            >
+              Ongoing
+            </button>
+            <span className="slider" />
           </div>
-          <div className="view-toggle">
+          <div className={`view-toggle ${viewMode}`}>
             <button className={viewMode === 'marquee' ? 'active' : ''} onClick={() => setViewMode('marquee')}>Marquee</button>
             <button className={viewMode === 'grid' ? 'active' : ''} onClick={() => setViewMode('grid')}>Grid</button>
+            <span className="slider" />
           </div>
         </div>
       </div>
       
-      {statusFilter === 'all' ? (
-        viewMode === 'marquee' ? (
-          <>
-            <MarqueeBlock title="Completed" items={completed} duration="30s" />
-            <MarqueeBlock title="Ongoing" items={ongoing} duration="22s" />
-          </>
-        ) : (
-          <>
-            <GridBlock title="Completed" items={completed} />
-            <GridBlock title="Ongoing" items={ongoing} />
-          </>
-        )
+      {viewMode === 'marquee' ? (
+        <MarqueeBlock title={statusFilter === 'completed' ? 'Completed' : 'Ongoing'} items={filteredBooks} />
       ) : (
-        viewMode === 'marquee' ? (
-          <MarqueeBlock title={statusFilter === 'completed' ? 'Completed' : 'Ongoing'} items={filteredBooks} />
-        ) : (
-          <GridBlock title={statusFilter === 'completed' ? 'Completed' : 'Ongoing'} items={filteredBooks} />
-        )
+        <GridBlock title={statusFilter === 'completed' ? 'Completed' : 'Ongoing'} items={filteredBooks} />
       )}
     </div>
   );

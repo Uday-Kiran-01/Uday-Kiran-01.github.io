@@ -11,14 +11,14 @@ code {
     monospace;
 }
 
-/* Dark selection (prefer subtle dark highlight rather than default blue) */
+/* Blue selection for all pages */
 ::selection {
-  background: #222;
+  background: #0071eb;
   color: #fff;
 }
 
 /* Firefox */
 ::-moz-selection {
-  background: #222;
+  background: #0071eb;
   color: #fff;
 }

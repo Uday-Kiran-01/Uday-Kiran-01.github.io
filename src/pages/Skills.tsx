@@ -2,8 +2,8 @@ import React from 'react';
 import './Skills.css';
 import { skillsData } from '../data/staticData';
 
-import { FaReact, FaNodeJs, FaAws, FaDocker, FaJava, FaPython, FaHtml5, FaCss3Alt, FaGithub, FaTerminal, FaRobot, FaAngular, FaNetworkWired } from 'react-icons/fa';
-import { SiTypescript, SiPostgresql, SiMysql, SiGooglecloud, SiJavascript, SiBootstrap, SiSqlite, SiJupyter, SiJira, SiScikitlearn, SiPandas, SiApachekafka, SiTensorflow, SiHuggingface, SiOpenai, SiNumpy } from 'react-icons/si';
+import { FaReact, FaNodeJs, FaAws, FaDocker, FaJava, FaPython, FaHtml5, FaCss3Alt, FaGithub, FaTerminal, FaRobot, FaAngular, FaNetworkWired, FaDatabase } from 'react-icons/fa';
+import { SiTypescript, SiPostgresql, SiMysql, SiGooglecloud, SiJavascript, SiBootstrap, SiSqlite, SiJupyter, SiJira, SiScikitlearn, SiPandas, SiApachekafka, SiTensorflow, SiHuggingface, SiOpenai, SiNumpy, SiPostman } from 'react-icons/si';
 import { IconType } from 'react-icons';
 
 const iconMap: { [key: string]: IconType } = {
@@ -36,6 +36,8 @@ const iconMap: { [key: string]: IconType } = {
   SiJupyter: SiJupyter,
   SiJira: SiJira,
   SiScikitlearn: SiScikitlearn,
+  FaDatabase: FaDatabase,
+  SiPostman: SiPostman,
 };
 
 

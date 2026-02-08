@@ -11,6 +11,7 @@ interface ContinueWatchingProps {
 
 const continueWatchingConfig = {
   recruiter: [
+  { title: "Research", imgSrc: "https://picsum.photos/id/1010/300/200", link: "/research-papers" },
   { title: "YouTube", imgSrc: "https://picsum.photos/id/1011/300/200", link: "/youtube" },
     { title: "Books", imgSrc: "https://picsum.photos/id/1026/300/200", link: "/reading" },
     { title: "Contact Me", imgSrc: "https://picsum.photos/id/1029/300/200", link: "/contact-me" },

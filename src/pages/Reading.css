@@ -1,23 +1,56 @@
 /* Reading.css */
 
+.reading-container ::selection {
+  background: #0071eb;
+  color: #ffffff;
+}
+
 .reading-container {
-  padding: 5rem 2rem;
+  padding: 5rem 2rem 2rem 2rem;
   color: #ffffff;
   text-align: center;
   background: linear-gradient(135deg, #141414 0%, #1a1a1a 100%);
   min-height: 100vh;
 }
 
+.intro-section {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding: 1rem 0 0 0;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  background: transparent;
+}
+
+.page-title {
+  font-size: 3rem;
+  color: #e50914;
+  font-weight: 700;
+  margin: 0 0 1rem 0;
+  letter-spacing: -0.02em;
+  display: block;
+  background: none;
+}
+
+.page-subtitle {
+  font-size: 1.2rem;
+  color: #b3b3b3;
+  margin: 0;
+  font-weight: 400;
+}
+
 .reading-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 2rem;
-  max-width: 1200px;
+  margin-top: 2rem;
+  gap: 1.5rem;
+  padding: 0;
+  width: 500px;
+  max-width: 90%;
   margin-left: auto;
   margin-right: auto;
-  flex-wrap: wrap;
-  gap: 1rem;
 }
 
 .reading-title {
@@ -34,33 +67,88 @@
   gap: 1rem;
   align-items: center;
 }
-
-.status-toggle, .view-toggle {
-  display: flex;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 25px;
+/* Status + view toggles: single pill with equal segments. Hover on inactive makes it red */
+/* Unified toggle style for both status and view controls */
+.status-toggle,
+.view-toggle {
+  display: inline-flex;
+  background: #2a2a2a;
+  border-radius: 50px;
   padding: 4px;
+  position: relative;
+  gap: 0;
+  border: none;
+  box-shadow: none;
 }
 
-.status-toggle button, .view-toggle button {
-  padding: 8px 16px;
+.status-toggle button,
+.view-toggle button {
+  flex: 1;
+  padding: 8px 20px;
   border: none;
   background: transparent;
   color: #fff;
-  border-radius: 20px;
   cursor: pointer;
-  transition: all 0.3s ease;
-  font-weight: 500;
-  font-size: 0.9rem;
+  font-weight: 600;
+  font-size: 15px;
+  position: relative;
+  z-index: 2;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-width: 0;
 }
 
-.status-toggle button.active, .view-toggle button.active {
-  background: #E50914;
+.status-toggle button.active,
+.view-toggle button.active {
   color: #fff;
 }
 
-.status-toggle button:hover:not(.active), .view-toggle button:hover:not(.active) {
-  background: rgba(255, 255, 255, 0.1);
+.view-toggle button {
+  padding: 6px 16px;
+  font-size: 13px;
+}
+
+.status-toggle button:not(.active):hover,
+.view-toggle button:not(.active):hover {
+  color: #e50914;
+}
+
+.status-toggle .slider,
+.view-toggle .slider {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: calc(50% - 4px);
+  height: calc(100% - 8px);
+  background: #e50914;
+  border-radius: 50px;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1;
+  box-shadow: none;
+}
+
+/* Status toggle slider positions */
+.status-toggle.ongoing .slider {
+  transform: translateX(100%);
+}
+
+.view-toggle {
+  padding: 3px;
+}
+
+.view-toggle .slider {
+  top: 3px;
+  left: 3px;
+  width: calc(50% - 3px);
+  height: calc(100% - 6px);
+}
+
+/* View toggle slider positions */
+.view-toggle.grid .slider {
+  transform: translateX(100%);
 }
 
 .reading-intro {
@@ -74,17 +162,21 @@
 
 .books-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   gap: 2rem;
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
+}
+
+.books-grid .book-card {
+  width: 100%;
 }
 
 /* Marquee styles */
 .books-marquee { width: 100%; overflow: hidden; box-sizing: border-box; padding: 1rem 0; }
 .marquee-viewport { width: 100%; overflow: hidden; }
-.marquee-track { display: flex; align-items: stretch; gap: 2rem; width: max-content; box-sizing: content-box; animation: marqueeMove var(--duration, 28s) linear infinite; }
-.marquee-item { flex: 0 0 auto; width: 300px; }
+.marquee-track { display: flex; align-items: stretch; gap: 1.5rem; width: max-content; box-sizing: content-box; animation: marqueeMove var(--duration, 28s) linear infinite; }
+.marquee-item { flex: 0 0 auto; width: 280px; }
 
 .books-section-header { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:8px; }
 .marquee-controls { display:flex; align-items:center; gap:8px; }
@@ -112,6 +204,8 @@
   animation: cardSlideIn 0.6s ease-out forwards;
   opacity: 0;
   transform: translateY(30px);
+  display: flex;
+  flex-direction: column;
 }
 
 .book-card::before {
@@ -138,7 +232,7 @@
 
 .book-cover {
   width: 100%;
-  height: 300px;
+  height: 360px;
   object-fit: cover;
   transition: transform 0.4s ease;
 }
@@ -148,33 +242,59 @@
 }
 
 .book-info {
-  padding: 1.5rem;
+  padding: 1.5rem 1.2rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.marquee-item .book-title {
+  margin: 0 0 0.8rem 0;
+}
+
+.marquee-item .book-author {
+  margin-bottom: 0.9rem;
+}
+
+.books-grid .book-title {
+  margin: 0 0 0.8rem 0 !important;
+  height: 6rem !important;
+}
+
+.books-grid .book-author {
+  margin-bottom: 0.9rem !important;
+  min-height: 1.4rem !important;
 }
 
 .book-title {
-  font-size: 1.25rem;
-  color: #ffffff;
-  margin: 0.5rem 0;
-  font-weight: 600;
+  font-size: 1.15rem;
+  color: #e50914;
+  margin: 0 0 0.5rem 0;
+  font-weight: 700;
   letter-spacing: -0.01em;
+  line-height: 1.35;
+  height: 6rem;
 }
 
 .book-author {
-  font-size: 1rem;
+  font-size: 0.95rem;
   color: #b3b3b3;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
   font-weight: 500;
+  min-height: 1.4rem;
 }
 
 .book-description {
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   color: #d2d2d2;
   line-height: 1.6;
-  transition: color 0.3s ease;
+  transition: none;
+  flex: 1;
+  min-height: 5.6rem;
 }
 
 .book-card:hover .book-description {
-  color: #e50914;
+  color: #d2d2d2;
 }
 
 /* Telugu books */

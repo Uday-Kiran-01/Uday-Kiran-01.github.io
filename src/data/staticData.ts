@@ -1,6 +1,6 @@
 // staticData.ts - All portfolio data in one place for easy editing
 
-import { ProfileBanner, WorkPermit, TimelineItem, Project, Certification, Skill } from '../types';
+import { ProfileBanner, WorkPermit, TimelineItem, Project, Certification, Skill, ResearchPaper, Patent } from '../types';
 
 // PROFILE BANNER
 export const profileBannerData: ProfileBanner = {
@@ -9,6 +9,7 @@ export const profileBannerData: ProfileBanner = {
   resumeLink: { url: 'https://drive.google.com/file/d/YOUR_RESUME_ID/view' },
   linkedinLink: 'https://www.linkedin.com/in/udaykiranyaddanapudi/',
   profileSummary: 'Full Stack Developer & AI Data Scientist with expertise in React, Python, Machine Learning and Cloud Computing. Passionate about building scalable web applications and delivering data-driven solutions.',
+  googleScholarLink: 'https://scholar.google.com/citations?user=O1TUuP8AAAAJ',
 };
 
 // WORK PERMIT
@@ -25,18 +26,20 @@ export const timelineData: TimelineItem[] = [
     name: 'Shift Logistics',
     title: 'Full Stack Developer (Internship)',
     techStack: 'Angular, TypeScript, Data Analysis, Git, GitHub, RESTful APIs',
+    logo: '/shift logo.png',
     summaryPoints: [
       'Developed scalable Angular features, improving UI/UX with dynamic forms, validation, and profile management.',
       'Integrated user authentication via RESTful APIs to ensure seamless frontend-backend data flow and scalability.',
       'Authored test cases to validate product features and ensure reliable performance.',
     ],
-    dateRange: 'August 2025 - Present',
+    dateRange: 'August 2025 - February 2026',
   },
   {
     timelineType: 'education',
     name: 'Chalmers University of Technology',
     title: "Master's in Data Science and AI",
     techStack: '',
+    logo: '/chalmers.jpg',
     summaryPoints: [
       'Design of AI Systems',
       'Applied Machine Learning',
@@ -49,6 +52,7 @@ export const timelineData: TimelineItem[] = [
     name: 'YoHRs',
     title: 'AI Data Scientist (Part-Time)',
     techStack: 'Python, Machine Learning, PostgreSQL, GitHub',
+    logo: '/yohrs.jpg',
     summaryPoints: [
       'Developed a course recommendation system, boosting course enrollment by 20%',
       'Integrated three AI agents into the workflow, improving efficiency by 25%',
@@ -61,6 +65,7 @@ export const timelineData: TimelineItem[] = [
     name: 'OrbitX India Aerospace',
     title: 'Research and Development Intern',
     techStack: 'Python, Power BI, Data Analysis, SQL, Excel, GitHub',
+    logo: '/orbitx.jpg',
     summaryPoints: [
       'Collected, stored, and analyzed data on reusable rockets, leading to a 15% increase in engine efficiency',
       'Identified and implemented performance improvements, resulting in a 5% reduction in rocket weight',
@@ -73,6 +78,7 @@ export const timelineData: TimelineItem[] = [
     name: 'Medibliss Transactions Pvt Ltd',
     title: 'React Developer Intern',
     techStack: 'React, JavaScript, HTML/CSS, Git, REST APIs, Node.js',
+    logo: '/medibliss.jpg',
     summaryPoints: [
       'Enhanced user experience by developing React-based interfaces, boosting website performance by 10%',
       'Coordinated with cross-functional teams throughout the development lifecycle, reducing development delays by 20%',
@@ -83,7 +89,8 @@ export const timelineData: TimelineItem[] = [
     timelineType: 'work',
     name: 'WorkFall',
     title: 'Cloud Computing Intern',
-    techStack: 'AWS (EC2, S3), AngularJS, JavaScript, HTML/CSS, Git, REST APIs',
+    techStack: 'AWS (EC2, S3, CloudWatch), AngularJS, JavaScript, HTML/CSS, Git, REST APIs',
+    logo: '/workfall.png',
     summaryPoints: [
       'Optimized cloud scalability and performance by implementing AWS services, resulting in a 30% increase in system efficiency',
       'Launched a Food Ordering Website with Angular JS on AWS, enhancing performance by 16%',
@@ -96,6 +103,7 @@ export const timelineData: TimelineItem[] = [
     name: 'GITAM University',
     title: 'B.Tech. in Computer Science and Engineering',
     techStack: '',
+    logo: '/gitam.jpg',
     summaryPoints: [
       'Database Management Systems',
       'Web Applications Development',
@@ -108,28 +116,78 @@ export const timelineData: TimelineItem[] = [
 // PROJECTS
 export const projectsData: Project[] = [
   {
+    title: 'PostureCapture',
+    description: 'AI-powered posture detection and correction system.',
+    techUsed: 'Python, Machine Learning, Computer Vision',
+    image: { url: '' },
+    status: 'ongoing',
+    category: 'personal',
+    githubLink: 'https://github.com/bhoomi333/PostureCapture',
+    isTeamProject: true,
+  },
+  {
+    title: 'Portfolio Website',
+    description: 'Personal portfolio website showcasing projects, skills, and experience.',
+    techUsed: 'React, TypeScript, CSS',
+    image: { url: '' },
+    status: 'completed',
+    category: 'personal',
+    githubLink: 'https://github.com/Uday-Kiran-01/uday-kiran-01.github.io',
+    liveLink: 'https://uday-kiran-01.github.io',
+  },
+  {
+    title: 'Photos Organisation Tool',
+    description: 'Automated photo sorting tool that organizes photos by year, month, date in ascending order using Windows batch file.',
+    techUsed: 'Python, File Management, Batch Scripting',
+    image: { url: '' },
+    status: 'completed',
+    category: 'personal',
+    githubLink: 'https://github.com/Uday-Kiran-01/Photos-Organisation-Tool',
+  },
+  {
+    title: 'Weather App',
+    description: 'Real-time weather application with location-based forecasts.',
+    techUsed: 'React, JavaScript, Weather API',
+    image: { url: '' },
+    status: 'completed',
+    category: 'professional',
+    githubLink: 'https://github.com/Uday-Kiran-01/weather-app',
+  },
+  {
     title: 'Fraud Hunter',
     description: 'End-to-end fraud detection pipeline with feature engineering, anomaly detection and monitoring.',
     techUsed: 'Python, scikit-learn, pandas, Flask',
-    image: { url: 'https://via.placeholder.com/400x225?text=Fraud+Hunter' },
+    image: { url: '' },
+    status: 'completed',
+    category: 'professional',
+    githubLink: 'https://github.com/Uday-Kiran-01/Fraud-Hunter',
   },
   {
     title: 'Fraud Detection',
     description: 'Supervised fraud detection system for transaction data using tree-based models and validation.',
     techUsed: 'Python, XGBoost, pandas, Docker',
-    image: { url: 'https://via.placeholder.com/400x225?text=Fraud+Detection' },
-  },
-  {
-    title: 'Fake News Mini',
-    description: 'Lightweight NLP classifier to detect fake news using modern embeddings and preprocessing.',
-    techUsed: 'Python, HuggingFace Transformers, NLP, scikit-learn',
-    image: { url: 'https://via.placeholder.com/400x225?text=Fake+News+Mini' },
+    image: { url: '' },
+    status: 'completed',
+    category: 'professional',
+    githubLink: 'https://github.com/Uday-Kiran-01/Fraud-Detection',
   },
   {
     title: 'Fraud Detection — Advanced Validation',
     description: 'Advanced validation strategies and robustness checks for fraud detection models.',
     techUsed: 'Python, cross-validation, model-robustness, ML Ops',
-    image: { url: 'https://via.placeholder.com/400x225?text=Fraud+Detection+Advanced' },
+    image: { url: '' },
+    status: 'completed',
+    category: 'professional',
+    githubLink: 'https://github.com/Uday-Kiran-01/Fraud-Detection---Advanced-Validation',
+  },
+  {
+    title: 'Fake News Mini',
+    description: 'Lightweight NLP classifier to detect fake news using modern embeddings and preprocessing.',
+    techUsed: 'Python, HuggingFace Transformers, NLP, scikit-learn',
+    image: { url: '' },
+    status: 'completed',
+    category: 'professional',
+    githubLink: 'https://github.com/Uday-Kiran-01/Fake-News-Mini',
   },
 ];
 
@@ -177,10 +235,11 @@ export const skillsData: Skill[] = [
   
   // Database
   { name: 'PostgreSQL', category: 'Database', description: 'Relational database management', icon: 'SiPostgresql' },
+  { name: 'MySQL', category: 'Database', description: 'Relational database system', icon: 'SiMysql' },
   { name: 'SQLite', category: 'Database', description: 'Lightweight embedded SQL database', icon: 'SiSqlite' },
   
   // DevOps & Cloud
-  { name: 'AWS', category: 'DevOps & Cloud', description: 'EC2, S3, Cloud infrastructure', icon: 'FaAws' },
+  { name: 'AWS', category: 'DevOps & Cloud', description: 'Cloud infrastructure (EC2, S3, CloudWatch)', icon: 'FaAws' },
   { name: 'Docker', category: 'DevOps & Cloud', description: 'Containerization', icon: 'FaDocker' },
   { name: 'Git', category: 'DevOps & Cloud', description: 'Version control', icon: 'FaGithub' },
 
@@ -203,7 +262,39 @@ export const skillsData: Skill[] = [
   { name: 'Bootstrap', category: 'Frameworks & Automation', description: 'CSS framework for responsive UI', icon: 'SiBootstrap' },
   { name: 'AutoGPT', category: 'Frameworks & Automation', description: 'Autonomous agents framework', icon: 'FaRobot' },
   { name: 'GitHub', category: 'Tools', description: 'Repository hosting and collaboration', icon: 'FaGithub' },
+  { name: 'DBeaver', category: 'Tools', description: 'Database management tool', icon: 'FaDatabase' },
+  { name: 'Postman', category: 'Tools', description: 'API testing and development', icon: 'SiPostman' },
   { name: 'Jira', category: 'Tools', description: 'Issue tracking & project management', icon: 'SiJira' },
   { name: 'Jupyter', category: 'Tools', description: 'Interactive notebooks', icon: 'SiJupyter' },
   { name: 'CLI', category: 'Tools', description: 'Command-line proficiency', icon: 'FaTerminal' },
+];
+
+// RESEARCH PAPERS
+export const researchPapersData: ResearchPaper[] = [
+  {
+    title: 'Comparative Analysis of Machine Learning Algorithms for Crop Yield Prediction',
+    authors: 'Uday Kiran Yaddanapudi, et al.',
+    conference: '2022 IEEE International Conference on Data Science and Information System (ICDSIS)',
+    year: '2022',
+    link: 'https://ieeexplore.ieee.org/abstract/document/9988646',
+  },
+  {
+    title: 'Machine Learning Based Crop Yield Prediction',
+    authors: 'Uday Kiran Yaddanapudi, et al.',
+    conference: '2022 IEEE International Conference on Data Science and Information System (ICDSIS)',
+    year: '2022',
+    link: 'https://ieeexplore.ieee.org/document/9988094',
+  },
+];
+
+// PATENTS
+export const patentsData: Patent[] = [
+  {
+    title: 'Patent Application',
+    applicationNumber: '202341015160',
+    status: 'Published',
+    filingDate: '2023',
+    inventors: 'Uday Kiran Yaddanapudi, et al.',
+    link: 'https://iprsearch.ipindia.gov.in/PublicSearch/PublicationSearch/ApplicationStatus',
+  },
 ];

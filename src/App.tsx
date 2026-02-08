@@ -17,6 +17,7 @@ const Music = React.lazy(() => import('./pages/Music'));
 const Reading = React.lazy(() => import('./pages/Reading'));
 const Youtube = React.lazy(() => import('./pages/Youtube'));
 const Certifications = React.lazy(() => import('./pages/Certifications'));
+const Research = React.lazy(() => import('./pages/Research'));
 
 const App: React.FC = () => {
   return (
@@ -36,6 +37,7 @@ const App: React.FC = () => {
         <Route path="/reading" element={<Layout><Reading /></Layout>} />
         <Route path="/youtube" element={<Layout><Youtube /></Layout>} />
         <Route path="/certifications" element={<Layout><Certifications /></Layout>} />
+        <Route path="/research-papers" element={<Layout><Research /></Layout>} />
       </Routes>
     </Suspense>
   );

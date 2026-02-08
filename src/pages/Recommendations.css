@@ -13,14 +13,16 @@
   color: #fff;
   padding: 25px;
   border-radius: 10px;
-  box-shadow: 0 8px 20px rgba(255, 0, 0, 0.3), 0 0 10px rgba(255, 0, 0, 0.2); /* Softer shadow with subtle glow */
+  box-shadow: 0 8px 20px rgba(255, 0, 0, 0.3), 0 0 10px rgba(255, 0, 0, 0.2); /*
+ Softer shadow with subtle glow */
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   border: 2px dotted #e50914; /* Netflix red border */
 }
 
 .recommendation-card:hover {
   transform: scale(1.03); /* Slight zoom on hover */
-  box-shadow: 0 12px 30px rgba(255, 0, 0, 0.5), 0 0 15px rgba(255, 0, 0, 0.4); /* Enhanced shadow on hover */
+  box-shadow: 0 12px 30px rgba(255, 0, 0, 0.5), 0 0 15px rgba(255, 0, 0, 0.4); /*
+ Enhanced shadow on hover */
 }
 
 .recommendation-header {

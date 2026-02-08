@@ -1,7 +1,7 @@
 import React from 'react';
 import './Music.css';
 import albumCover1 from '../images/ukfornetflix.png'; // placeholder cover
-import albumCover2 from '../images/my_image.jpg'; // placeholder cover
+import albumCover2 from '../images/blue.png'; // placeholder cover (replaced personal image)
 import albumCover3 from '../images/blue.png'; // placeholder cover
 
 const favoriteGenres = ["Rock", "Classic Rock", "Hard Rock", "Blues", "Alternative"];

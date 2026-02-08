@@ -1,45 +1,49 @@
-import chrisProfilePic from '../images/chris.jpg';
-
 export type Recommendation = {
   id: string;
   name: string;
   title: string;
   date: string;
-  text: string;
+  text: string[];
   avatarUrl?: string;
   linkedinUrl?: string;
 };
 
 const recommendations: Recommendation[] = [
   {
-    id: 'chris-1',
-    name: 'Snigdha Shree',
-    title: 'Senior Salesforce Developer',
-    date: '2023-08-15',
-    text:
-      "It is with great pleasure that I write this reference for Uday Kiran, who worked for us as a software developer at Kajima from June 2023. During their time with us, Uday demonstrated strong technical expertise, a passion for problem-solving, a willingness to learn, and a collaborative spirit that greatly contributed to our team's success.",
-    avatarUrl: chrisProfilePic,
-    linkedinUrl: 'https://www.linkedin.com/in/chris-smith-example/'
-  },
-  {
     id: 'snigdha-1',
     name: 'Snigdha Shree',
-    title: 'Senior Salesforce Developer',
-    date: '2022-12-06',
-    text:
-      'Uday is knowledgeable, motivated, and eager. Along with his exceptional skills, Uday exhibited a level of understanding for all work that we did as an Intern. For whatever task or activity, he always offered his utmost effort.',
-    avatarUrl: 'https://i.pravatar.cc/120?img=32',
+    title: 'Senior Salesforce Developer @Melonleaf Consulting',
+    date: 'December 6, 2022',
+    text: [
+      'Uday is knowledgeable, motivated, and eager. Along with his exceptional skills, Uday exhibited a level of understanding for all work that we did as an intern. For whatever task or activity, he always offered his utmost effort. He provided his all, regardless of whether he was preoccupied with tests or college work.',
+      'All the team members found him incredibly helpful, courteous, and cheerful. He always has a smile on his face. We were given several tasks to complete as a team. He is a breeze to collaborate with. I would be happy to work with you again if the opportunity arises in the future.'
+    ],
+    avatarUrl: 'https://ui-avatars.com/api/?name=Snigdha+Shree&background=e50914&color=fff&size=120&bold=true',
     linkedinUrl: 'https://www.linkedin.com/in/snigdha-shree/'
   },
   {
-    id: 'placeholder-1',
-    name: 'Alex Johnson',
-    title: 'Product Manager',
-    date: '2023-06-01',
-    text:
-      'Uday consistently delivered high-quality code while meeting project deadlines. Their proactive approach to finding innovative solutions set them apart.',
-    avatarUrl: 'https://i.pravatar.cc/120?img=12',
-    linkedinUrl: 'https://www.linkedin.com/in/alex-johnson-example/'
+    id: 'snigdha-2',
+    name: 'Snigdha Shree',
+    title: 'Senior Salesforce Developer @Melonleaf Consulting',
+    date: 'December 6, 2022',
+    text: [
+      'Uday is knowledgeable, motivated, and eager. Along with his exceptional skills, Uday exhibited a level of understanding for all work that we did as an intern. For whatever task or activity, he always offered his utmost effort. He provided his all, regardless of whether he was preoccupied with tests or college work.',
+      'All the team members found him incredibly helpful, courteous, and cheerful. He always has a smile on his face. We were given several tasks to complete as a team. He is a breeze to collaborate with. I would be happy to work with you again if the opportunity arises in the future.'
+    ],
+    avatarUrl: 'https://ui-avatars.com/api/?name=Snigdha+Shree&background=e50914&color=fff&size=120&bold=true',
+    linkedinUrl: 'https://www.linkedin.com/in/snigdha-shree/'
+  },
+  {
+    id: 'snigdha-3',
+    name: 'Snigdha Shree',
+    title: 'Senior Salesforce Developer @Melonleaf Consulting',
+    date: 'December 6, 2022',
+    text: [
+      'Uday is knowledgeable, motivated, and eager. Along with his exceptional skills, Uday exhibited a level of understanding for all work that we did as an intern. For whatever task or activity, he always offered his utmost effort. He provided his all, regardless of whether he was preoccupied with tests or college work.',
+      'All the team members found him incredibly helpful, courteous, and cheerful. He always has a smile on his face. We were given several tasks to complete as a team. He is a breeze to collaborate with. I would be happy to work with you again if the opportunity arises in the future.'
+    ],
+    avatarUrl: 'https://ui-avatars.com/api/?name=Snigdha+Shree&background=e50914&color=fff&size=120&bold=true',
+    linkedinUrl: 'https://www.linkedin.com/in/snigdha-shree/'
   }
 ];
 

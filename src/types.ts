@@ -8,6 +8,7 @@ export interface ProfileBanner {
   };
   linkedinLink: string;
   profileSummary: string;
+  googleScholarLink?: string;
 }
 
 export interface WorkPermit {
@@ -22,6 +23,7 @@ export interface TimelineItem {
   name: string;
   title: string;
   techStack: string;
+  logo?: string;
   summaryPoints: string[];
   dateRange: string;
 }
@@ -31,6 +33,11 @@ export interface Project {
   description: string;
   techUsed: string;
   image: { url: string };
+  status: 'completed' | 'ongoing';
+  category: 'personal' | 'professional';
+  githubLink?: string;
+  liveLink?: string;
+  isTeamProject?: boolean;
 }
 
 export interface Certification {
@@ -60,4 +67,22 @@ export interface Skill {
   category: string;
   description: string;
   icon: string;
+}
+
+export interface ResearchPaper {
+  title: string;
+  authors: string;
+  conference: string;
+  year: string;
+  link: string;
+  description?: string;
+}
+
+export interface Patent {
+  title: string;
+  applicationNumber: string;
+  status: string;
+  filingDate: string;
+  inventors: string;
+  link: string;
 }

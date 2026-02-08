@@ -1,94 +1,97 @@
-import React, { useMemo, useState } from 'react';
+import React, { useState } from 'react';
 import './Research.css';
-import { projectsData, certificationsData } from '../data/staticData';
+import { researchPapersData, patentsData } from '../data/staticData';
+import { FaExternalLinkAlt } from 'react-icons/fa';
 
 const TABS = ["Research Papers", "Patent"] as const;
 type Tab = typeof TABS[number];
 
 const Research: React.FC = () => {
   const [activeTab, setActiveTab] = useState<Tab>('Research Papers');
-  const [copied, setCopied] = useState(false);
-
-  const researchItems = useMemo(() => {
-    return projectsData.map((p: any) => ({
-      title: p.title,
-      link: (p.image && p.image.url) || '#',
-    }));
-  }, []);
-  const patentItems = useMemo(() => {
-    return certificationsData.map((pt: any) => ({
-      title: pt.title,
-      subtitle: pt.issuer,
-      link: pt.link || '#',
-      image: undefined as string | undefined,
-      timeline: pt.issuedDate,
-      number: undefined,
-      status: 'published',
-      inventors: undefined,
-      publicationDate: undefined,
-    }));
-  }, []);
-
-  const handleCopy = (text: string) => {
-    navigator.clipboard.writeText(text);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 1200);
-  };
 
   return (
     <div className="research-container">
-      <h2 className="title">Research</h2>
-
-      <div style={{ height: 8 }} />
-      <div className="filter-toggle" data-active={activeTab === 'Research Papers' ? '0' : '1'}>
-        <button
-          className={activeTab === 'Research Papers' ? 'active' : ''}
-          onClick={() => setActiveTab('Research Papers')}
-        >
-          Research Papers
-        </button>
-        <button
-          className={activeTab === 'Patent' ? 'active' : ''}
-          onClick={() => setActiveTab('Patent')}
-        >
-          Patent
-        </button>
+      <div className="research-header">
+        <h1 className="research-heading">Research & Innovation</h1>
+        <p className="research-subheading">
+          Published research papers and patent applications
+        </p>
       </div>
-      <div style={{ height: 2 }} />
+
+      <div className="research-toggle">
+        <div className={`toggle-slider-container ${activeTab === 'Research Papers' ? 'papers' : 'patent'}`}>
+          <button
+            className={activeTab === 'Research Papers' ? 'active' : ''}
+            onClick={() => setActiveTab('Research Papers')}
+          >
+            Research Papers
+          </button>
+          <button
+            className={activeTab === 'Patent' ? 'active' : ''}
+            onClick={() => setActiveTab('Patent')}
+          >
+            Patents
+          </button>
+          <div className="toggle-slider"></div>
+        </div>
+      </div>
 
       {activeTab === 'Research Papers' && (
-        <div className="research-papers-list" style={{display:'grid',gridTemplateColumns:'repeat(auto-fit, minmax(380px, 1fr))',gap:'38px',marginTop:'38px'}}>
-          {researchItems.map((paper: any, idx: number) => (
-            <div className="research-paper-card" key={idx}>
-              <div className="research-paper-title">{paper.title}</div>
-              <hr className="official-patent-divider" />
-              <a href={paper.link} target="_blank" rel="noopener noreferrer" className="research-paper-link">View Full Paper</a>
+        <div className="research-grid">
+          {researchPapersData.map((paper, index) => (
+            <div
+              key={index}
+              className="research-card"
+              style={{ '--delay': `${index * 0.1}s` } as React.CSSProperties}
+            >
+              <div className="research-card-content">
+                <h3>{paper.title}</h3>
+                <div className="paper-details">
+                  <p><strong>Authors:</strong> {paper.authors}</p>
+                  <p><strong>Conference:</strong> {paper.conference}</p>
+                </div>
+                <a
+                  href={paper.link}
+                  className="research-link"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <FaExternalLinkAlt /> View Paper
+                </a>
+              </div>
             </div>
           ))}
         </div>
       )}
 
       {activeTab === 'Patent' && (
-        patentItems.length > 0 ? (
-          <div className="card-grid" style={{ marginTop: 0, justifyContent: 'center', display: 'flex' }}>
-            {patentItems.map((item: any, idx: number) => (
-              <div className="research-card official-patent" key={idx} style={{ margin: '0 auto' }}>
-                <div className="official-patent-title">
-                  {item.title}
+        <div className="research-grid">
+          {patentsData.map((patent, index) => (
+            <div
+              key={index}
+              className="research-card patent-card"
+              style={{ '--delay': `${index * 0.1}s` } as React.CSSProperties}
+            >
+              <div className="research-card-content">
+                <h3>{patent.title}</h3>
+                <div className="patent-details">
+                  <p><strong>Application No:</strong> {patent.applicationNumber}</p>
+                  <p><strong>Status:</strong> <span className="patent-status">{patent.status}</span></p>
+                  <p><strong>Filing Date:</strong> {patent.filingDate}</p>
+                  <p><strong>Inventors:</strong> {patent.inventors}</p>
                 </div>
-                <hr className="official-patent-divider" />
-                <div className="official-patent-details">
-                  <span className="official-patent-label">Status:</span>
-                  <span className="official-patent-value">{item.status}</span>
-                  <span className="official-patent-label">Year:</span>
-                  <span className="official-patent-value">{item.timeline}</span>
-                </div>
+                <a
+                  href={patent.link}
+                  className="research-link"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <FaExternalLinkAlt /> View Patent Details
+                </a>
               </div>
-            ))}
-          </div>
-        ) : (
-          <div>No patents available.</div>
-        )
+            </div>
+          ))}
+        </div>
       )}
     </div>
   );

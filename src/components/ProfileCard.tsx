@@ -25,7 +25,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ name, image, onClick }) => {
           onError={handleImageError}
         />
       </div>
-      <h3 className="profile-name">{name}</h3>
+      <p className="profile-name">{name.charAt(0).toUpperCase() + name.slice(1)}</p>
     </div>
   );
 };

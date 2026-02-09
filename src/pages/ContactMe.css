@@ -1,18 +1,35 @@
 .contact-container {
-  padding: 40px 20px;
+  padding: 40px 20px 16px 20px;
   background-color: transparent;
   color: #e6e6e6;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
-  min-height: calc(100vh - 80px);
 }
-.profile-card { max-width: 1060px; width: 100%; display:flex; gap:30px; align-items:center; }
+.contact-container .profile-card { max-width: 1060px; width: 100%; display:flex; gap:30px; align-items:center; }
 
 /* image-card layout (large rounded photo with bottom overlay) */
 /* compact image-card: reduced size, no heavy framing */
-.image-card { width: min(420px, 92%); max-width: 420px; position: relative; border-radius: 12px; overflow: hidden; background: transparent; padding: 0; margin: 0 auto; }
-.image-card .card-img { width: 100%; height: auto; display: block; object-fit: cover; border-radius: 8px; filter: brightness(1.08) contrast(1.02); }
+.image-card {
+  width: min(470px, 88%);
+  max-width: 470px;
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  background: transparent;
+  padding: 0;
+  margin: 40px auto 16px auto; /* keep clear gap under navbar */
+  /* let the image keep a tall, portrait-like feel */
+}
+
+.image-card .card-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  border-radius: 8px;
+  filter: brightness(1.08) contrast(1.02);
+}
 
 
 .card-overlay { position: absolute; inset: 0; pointer-events: none; }
@@ -82,7 +99,7 @@
 .overlay-actions .btn .btn-icon { font-size: 1.05rem; }
 
 @media (max-width: 920px) {
-  .image-card { width: min(720px, 96%); aspect-ratio: 1 / 1; }
+  .image-card { width: min(720px, 96%); }
   .overlay-left { max-width: 62%; padding: 18px; }
   .card-name { font-size: 1.4rem; }
 }
@@ -97,39 +114,40 @@
 
 
 /* layout: left image (circular) + right matter box */
-.profile-media { flex: 0 0 var(--avatar-size); display:flex; align-items:center; justify-content:center; }
-.profile-media { position: relative; }
-.image-circle { width: var(--avatar-size); height: var(--avatar-size); border-radius: 50%; overflow: hidden; display:flex; align-items:center; justify-content:center; }
-.image-circle img, .profile-image { width: 100%; height: 100%; object-fit: cover; object-position: center; display:block; border-radius: 50%; box-shadow: none; border: 0; background: transparent; }
+.contact-container .profile-media { flex: 0 0 var(--avatar-size); display:flex; align-items:center; justify-content:center; }
+.contact-container .profile-media { position: relative; }
+.contact-container .image-circle { width: var(--avatar-size); height: var(--avatar-size); border-radius: 50%; overflow: hidden; display:flex; align-items:center; justify-content:center; }
+.contact-container .image-circle img,
+.contact-container .profile-image { width: 100%; height: 100%; object-fit: cover; object-position: center; display:block; border-radius: 50%; box-shadow: none; border: 0; background: transparent; }
 
 
-.profile-style { overflow: hidden; }
+.contact-container .profile-style { overflow: hidden; }
 
 
-.image-wrap { position: relative; width: 100%; height: 100%; border-radius: 16px; overflow: hidden; }
+.contact-container .image-wrap { position: relative; width: 100%; height: 100%; border-radius: 16px; overflow: hidden; }
 
-.card-avatar.cover { width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 12px; }
+.contact-container .card-avatar.cover { width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 12px; }
 
-.image-overlay { position: absolute; left: 0; right: 0; bottom: 0; top: 0; background: linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(0,0,0,0.45) 100%); display:flex; align-items:flex-end; }
+.contact-container .image-overlay { position: absolute; left: 0; right: 0; bottom: 0; top: 0; background: linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(0,0,0,0.45) 100%); display:flex; align-items:flex-end; }
 
-.overlay-text { padding: 16px; color: #fff; }
+.contact-container .overlay-text { padding: 16px; color: #fff; }
 
-.overlay-name { margin: 0; font-size: 1.05rem; font-weight:800; }
-.overlay-role { margin: 2px 0 0 0; font-size: 0.85rem; color: rgba(255,255,255,0.9); }
+.contact-container .overlay-name { margin: 0; font-size: 1.05rem; font-weight:800; }
+.contact-container .overlay-role { margin: 2px 0 0 0; font-size: 0.85rem; color: rgba(255,255,255,0.9); }
 
 
-.profile-info { flex: 1 1 auto; display:flex; align-items:stretch; }
-.profile-info .info-inner { width:100%; background: #ffffff; border-radius: 18px; padding: 34px; box-shadow: 0 28px 60px rgba(11,18,32,0.10); min-height: var(--avatar-size); }
-.profile-info .info-name { margin:0; color:#0b1220; font-size:2.1rem; letter-spacing:-0.6px; }
-.profile-info .info-head { display:flex; align-items:center; gap:16px; margin-bottom:6px; }
-.profile-info .status-badge.light { background: rgba(6, 150, 100, 0.09); color: #0a8a3e; border: 1px solid rgba(6,150,100,0.12); padding:6px 10px; border-radius:999px; font-weight:700; }
-.profile-info .info-title { margin: 6px 0 10px 0; color:#6e7176; font-size:0.98rem; }
-.profile-info .info-summary { color:#444; margin-bottom:18px; font-size:0.95rem; }
-.profile-info .info-actions { display:flex; gap:18px; align-items:center; }
-.profile-info .secondary-actions { display:flex; gap:12px; }
-.profile-info .btn { min-width:120px; }
-.profile-info .btn.outline { background: transparent; color:#111; border:1px solid rgba(16,24,32,0.06); }
-.profile-info .btn.subtle { background: rgba(16,24,32,0.04); color:#111; }
+.contact-container .profile-info { flex: 1 1 auto; display:flex; align-items:stretch; }
+.contact-container .profile-info .info-inner { width:100%; background: #ffffff; border-radius: 18px; padding: 34px; box-shadow: 0 28px 60px rgba(11,18,32,0.10); min-height: var(--avatar-size); }
+.contact-container .profile-info .info-name { margin:0; color:#0b1220; font-size:2.1rem; letter-spacing:-0.6px; }
+.contact-container .profile-info .info-head { display:flex; align-items:center; gap:16px; margin-bottom:6px; }
+.contact-container .profile-info .status-badge.light { background: rgba(6, 150, 100, 0.09); color: #0a8a3e; border: 1px solid rgba(6,150,100,0.12); padding:6px 10px; border-radius:999px; font-weight:700; }
+.contact-container .profile-info .info-title { margin: 6px 0 10px 0; color:#6e7176; font-size:0.98rem; }
+.contact-container .profile-info .info-summary { color:#444; margin-bottom:18px; font-size:0.95rem; }
+.contact-container .profile-info .info-actions { display:flex; gap:18px; align-items:center; }
+.contact-container .profile-info .secondary-actions { display:flex; gap:12px; }
+.contact-container .profile-info .btn { min-width:120px; }
+.contact-container .profile-info .btn.outline { background: transparent; color:#111; border:1px solid rgba(16,24,32,0.06); }
+.contact-container .profile-info .btn.subtle { background: rgba(16,24,32,0.04); color:#111; }
 
 
 .card-name {
@@ -138,9 +156,9 @@
   font-size: 1.4rem;
 }
 
-.name-row { display: flex; align-items: center; gap: 12px; }
+.contact-container .name-row { display: flex; align-items: center; gap: 12px; }
 
-.status-badge {
+.contact-container .status-badge {
   display: inline-block;
   background: rgba(229,9,20,0.07);
   color: #e50914;
@@ -152,32 +170,32 @@
   line-height: 1;
 }
 
-.btn.icon {
+.contact-container .btn.icon {
   width: 56px;
   height: 48px;
   padding: 0;
   justify-content: center;
   border-radius: 12px;
 }
-.btn.icon .btn-icon { font-size: 1.25rem; }
-.btn.icon:hover { transform: translateY(-3px); }
+.contact-container .btn.icon .btn-icon { font-size: 1.25rem; }
+.contact-container .btn.icon:hover { transform: translateY(-3px); }
 
 /* smaller variant for compact logos */
-.btn.icon.small {
+.contact-container .btn.icon.small {
   width: 44px;
   height: 40px;
   border-radius: 10px;
 }
-.btn.icon.small .btn-icon { font-size: 1.05rem; }
-.secondary-actions { display:flex; gap:10px; align-items:center; }
+.contact-container .btn.icon.small .btn-icon { font-size: 1.05rem; }
+.contact-container .secondary-actions { display:flex; gap:10px; align-items:center; }
 
 /* override min-width applied higher up so compact icon buttons don't expand */
-.profile-info .btn.icon.small {
+.contact-container .profile-info .btn.icon.small {
   min-width: 0 !important;
   padding: 0 !important;
 }
 
-.secondary-actions { display:flex; gap:12px; align-items:center; }
+.contact-container .secondary-actions { display:flex; gap:12px; align-items:center; }
 
 .card-summary {
   margin: 0 0 14px 0;
@@ -185,14 +203,14 @@
   font-size: 0.95rem;
 }
 
-.contact-actions {
+.contact-container .contact-actions {
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
   margin-bottom: 10px;
 }
 
-.btn {
+.contact-container .btn {
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -204,66 +222,66 @@
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
-.btn-icon { font-size: 1rem; }
+.contact-container .btn-icon { font-size: 1rem; }
 
-.btn.primary {
+.contact-container .btn.primary {
   background: #e50914;
   box-shadow: 0 6px 18px rgba(229,9,20,0.14);
 }
 
-.btn.icon.primary { box-shadow: 0 6px 18px rgba(229,9,20,0.14); }
+.contact-container .btn.icon.primary { box-shadow: 0 6px 18px rgba(229,9,20,0.14); }
 
-.btn.primary:hover { transform: translateY(-3px); box-shadow: 0 14px 36px rgba(229,9,20,0.16); }
+.contact-container .btn.primary:hover { transform: translateY(-3px); box-shadow: 0 14px 36px rgba(229,9,20,0.16); }
 
 /* LinkedIn branded button */
-.profile-info .btn.linkedin,
-.profile-info .btn.outline.linkedin,
-.btn.outline.linkedin {
+.contact-container .profile-info .btn.linkedin,
+.contact-container .profile-info .btn.outline.linkedin,
+.contact-container .btn.outline.linkedin {
   background: #0077B5 !important; /* LinkedIn blue (user-provided) */
   color: #ffffff !important;
   box-shadow: 0 8px 22px rgba(0,119,181,0.14) !important;
   border: 1px solid rgba(0,119,181,0.12) !important;
 }
-.profile-info .btn.linkedin .btn-icon,
-.btn.outline.linkedin .btn-icon { color: #ffffff !important; }
-.profile-info .btn.linkedin:hover,
-.btn.outline.linkedin:hover { transform: translateY(-3px); box-shadow: 0 18px 44px rgba(0,119,181,0.16) !important; }
+.contact-container .profile-info .btn.linkedin .btn-icon,
+.contact-container .btn.outline.linkedin .btn-icon { color: #ffffff !important; }
+.contact-container .profile-info .btn.linkedin:hover,
+.contact-container .btn.outline.linkedin:hover { transform: translateY(-3px); box-shadow: 0 18px 44px rgba(0,119,181,0.16) !important; }
 
 /* Google Scholar button (use Google blue) */
-.profile-info .btn.scholar,
-.profile-info .btn.outline.scholar,
-.btn.outline.scholar {
+.contact-container .profile-info .btn.scholar,
+.contact-container .profile-info .btn.outline.scholar,
+.contact-container .btn.outline.scholar {
   background: #4285F4 !important;
   color: #ffffff !important;
   box-shadow: 0 8px 22px rgba(66,133,244,0.12) !important;
   border: 1px solid rgba(66,133,244,0.10) !important;
 }
-.profile-info .btn.scholar .btn-icon,
-.btn.outline.scholar .btn-icon { color: #ffffff !important; }
-.profile-info .btn.scholar:hover,
-.btn.outline.scholar:hover { transform: translateY(-3px); box-shadow: 0 18px 44px rgba(66,133,244,0.14) !important; }
+.contact-container .profile-info .btn.scholar .btn-icon,
+.contact-container .btn.outline.scholar .btn-icon { color: #ffffff !important; }
+.contact-container .profile-info .btn.scholar:hover,
+.contact-container .btn.outline.scholar:hover { transform: translateY(-3px); box-shadow: 0 18px 44px rgba(66,133,244,0.14) !important; }
 
 /* GitHub button (dark) */
-.profile-info .btn.github,
-.profile-info .btn.outline.github,
-.btn.outline.github {
+.contact-container .profile-info .btn.github,
+.contact-container .profile-info .btn.outline.github,
+.contact-container .btn.outline.github {
   background: #111111 !important;
   color: #ffffff !important;
   box-shadow: 0 8px 22px rgba(0,0,0,0.28) !important;
   border: 1px solid rgba(255,255,255,0.04) !important;
 }
-.profile-info .btn.github .btn-icon,
-.btn.outline.github .btn-icon { color: #ffffff !important; }
-.profile-info .btn.github:hover,
-.btn.outline.github:hover { transform: translateY(-3px); box-shadow: 0 18px 44px rgba(0,0,0,0.32) !important; }
+.contact-container .profile-info .btn.github .btn-icon,
+.contact-container .btn.outline.github .btn-icon { color: #ffffff !important; }
+.contact-container .profile-info .btn.github:hover,
+.contact-container .btn.outline.github:hover { transform: translateY(-3px); box-shadow: 0 18px 44px rgba(0,0,0,0.32) !important; }
 
-.btn.outline {
+.contact-container .btn.outline {
   background: transparent;
   border: 1px solid rgba(16,24,32,0.06);
   color: #111;
 }
 
-.btn.subtle {
+.contact-container .btn.subtle {
   /* make subtle visible on white card: light gray background + dark text */
   background: #f3f4f6;
   color: #111;
@@ -272,15 +290,15 @@
 }
 
 /* subtle variant hover (Resume button) */
-.btn.subtle:hover,
-.btn.icon.subtle:hover {
+.contact-container .btn.subtle:hover,
+.contact-container .btn.icon.subtle:hover {
   transform: translateY(-3px);
   box-shadow: 0 18px 44px rgba(11,18,32,0.10);
   background: #eceff1;
   color: #000;
 }
 
-.btn.icon.subtle { background: rgba(255,255,255,0.03); }
+.contact-container .btn.icon.subtle { background: rgba(255,255,255,0.03); }
 
 .small-note {
   margin: 10px 0 0 0;
@@ -298,23 +316,23 @@
 
 /* Responsive */
 @media (max-width: 720px) {
-  .profile-card { flex-direction: column; align-items: center; gap:18px; --avatar-size: 320px; }
-  .profile-media { width: 92%; }
-  .profile-image { width: 100%; height: 320px; border-radius: 50%; }
-  .profile-info .info-inner { width: 92%; padding: 20px; }
-  .profile-info .info-name { font-size: 1.6rem; }
-  .profile-info .info-actions { justify-content:center; }
+  .contact-container .profile-card { flex-direction: column; align-items: center; gap:18px; --avatar-size: 320px; }
+  .contact-container .profile-media { width: 92%; }
+  .contact-container .profile-image { width: 100%; height: 320px; border-radius: 50%; }
+  .contact-container .profile-info .info-inner { width: 92%; padding: 20px; }
+  .contact-container .profile-info .info-name { font-size: 1.6rem; }
+  .contact-container .profile-info .info-actions { justify-content:center; }
 }
 
 /* responsive avatar sizes */
 @media (min-width: 721px) and (max-width: 1023px) {
-  .profile-card { --avatar-size: 420px; }
+  .contact-container .profile-card { --avatar-size: 420px; }
 }
 @media (min-width: 1024px) and (max-width: 1399px) {
-  .profile-card { --avatar-size: 520px; }
+  .contact-container .profile-card { --avatar-size: 520px; }
 }
 @media (min-width: 1400px) {
-  .profile-card { --avatar-size: 640px; }
+  .contact-container .profile-card { --avatar-size: 640px; }
 }
 
 /* Minimal single-image display (no boxes) */

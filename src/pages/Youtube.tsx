@@ -1,12 +1,10 @@
 import React from 'react';
 import './Youtube.css';
-import { FaYoutube, FaClock } from 'react-icons/fa';
-import { useEffect, useState } from 'react';
+import { FaYoutube } from 'react-icons/fa';
 
 // Channel handle (without @)
 const CHANNEL_HANDLE = 'cellulofeed';
 const CHANNEL_URL = `https://www.youtube.com/@${CHANNEL_HANDLE}/videos`;
-const API_KEY = process.env.REACT_APP_YT_API_KEY;
 
 type VideoItem = {
   id: string;
@@ -16,92 +14,28 @@ type VideoItem = {
   url: string;
 };
 
+const LATEST_VIDEO: VideoItem = {
+  id: 'UfsDV5aUtZk',
+  title: 'Latest Upload',
+  url: 'https://www.youtube.com/watch?v=UfsDV5aUtZk',
+};
+
+const SUGGESTED_VIDEOS: VideoItem[] = [
+  { id: 'NGCL-Jke5g8', title: 'Recommended: Video 1', url: 'https://www.youtube.com/watch?v=NGCL-Jke5g8' },
+  { id: 'FbAl8tzKJTE', title: 'Recommended: Video 2', url: 'https://www.youtube.com/watch?v=FbAl8tzKJTE' },
+  { id: 'rnzqK3S8U4I', title: 'Recommended: Video 3', url: 'https://www.youtube.com/watch?v=rnzqK3S8U4I' },
+  { id: 'fKzktFIWc5E', title: 'Recommended: Video 4', url: 'https://www.youtube.com/watch?v=fKzktFIWc5E' },
+];
+
 const Youtube: React.FC = () => {
-  const [latest, setLatest] = useState<VideoItem | null>(null);
-  const [suggested, setSuggested] = useState<VideoItem[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    if (!API_KEY) {
-      const FALLBACK_VIDEO_ID = 'UfsDV5aUtZk';
-      setLatest({ id: FALLBACK_VIDEO_ID, title: 'Latest Upload', url: `https://www.youtube.com/watch?v=${FALLBACK_VIDEO_ID}` });
-
-      const fallbackSuggested: VideoItem[] = [
-        { id: 'NGCL-Jke5g8', title: 'Recommended: Video 1', url: 'https://www.youtube.com/watch?v=NGCL-Jke5g8' },
-        { id: 'FbAl8tzKJTE', title: 'Recommended: Video 2', url: 'https://www.youtube.com/watch?v=FbAl8tzKJTE' },
-        { id: 'rnzqK3S8U4I', title: 'Recommended: Video 3', url: 'https://www.youtube.com/watch?v=rnzqK3S8U4I' },
-        { id: 'fKzktFIWc5E', title: 'Recommended: Video 4', url: 'https://www.youtube.com/watch?v=fKzktFIWc5E' },
-      ];
-      setSuggested(fallbackSuggested);
-      setLoading(false);
-      return;
-    }
-
-    (async () => {
-      try {
-        const searchCh = await fetch(
-          `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(
-            CHANNEL_HANDLE
-          )}&type=channel&maxResults=1&key=${API_KEY}`
-        ).then((r) => r.json());
-
-        const channelId = searchCh.items && searchCh.items[0] && searchCh.items[0].snippet && searchCh.items[0].snippet.channelId
-          ? searchCh.items[0].snippet.channelId
-          : null;
-
-        if (!channelId) {
-          setLoading(false);
-          return;
-        }
-
-        const videosResp = await fetch(
-          `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&order=date&type=video&maxResults=8&key=${API_KEY}`
-        ).then((r) => r.json());
-
-        if (!videosResp.items || videosResp.items.length === 0) {
-          setLoading(false);
-          return;
-        }
-
-        const ids = videosResp.items.map((it: any) => it.id.videoId).join(',');
-        const details = await fetch(
-          `https://www.googleapis.com/youtube/v3/videos?part=contentDetails,snippet&id=${ids}&key=${API_KEY}`
-        ).then((r) => r.json());
-
-        const nonShorts = (details.items || []).filter((it: any) => {
-          const duration = it.contentDetails && it.contentDetails.duration ? it.contentDetails.duration : null;
-          if (!duration) return true;
-          const match = duration.match(/PT(?:(\d+)M)?(?:(\d+)S)?/);
-          if (!match) return true;
-          const mins = parseInt(match[1] || '0', 10);
-          const secs = parseInt(match[2] || '0', 10);
-          const total = mins * 60 + secs;
-          return total >= 60;
-        });
-
-        const videoItems: VideoItem[] = nonShorts.map((it: any) => ({
-          id: it.id,
-          title: it.snippet.title,
-          description: it.snippet.description,
-          publishedAt: it.snippet.publishedAt,
-          url: `https://www.youtube.com/watch?v=${it.id}`,
-        }));
-
-        if (videoItems.length > 0) {
-          setLatest(videoItems[0]);
-          setSuggested(videoItems.slice(1, 5));
-        }
-      } catch (err) {
-      } finally {
-        setLoading(false);
-      }
-    })();
-  }, []);
+  const latest = LATEST_VIDEO;
+  const suggested = SUGGESTED_VIDEOS;
 
   return (
     <div className="youtube-page">
       <h2 className="youtube-title">
         <span className="youtube-icon" aria-hidden>
+          <FaYoutube />
         </span>
         <span className="youtube-text">YouTube - Indian Movies Breakdown (Personal)</span>
       </h2>
@@ -109,28 +43,17 @@ const Youtube: React.FC = () => {
 
       <div className="youtube-grid">
         <div className="video-section">
-          {latest ? (
-            <div className="blog-card video-card">
-              <div className="video-embed">
-                <iframe
-                  title={latest.title}
-                  src={`https://www.youtube.com/embed/${latest.id}`}
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                ></iframe>
-              </div>
+          <div className="blog-card video-card">
+            <div className="video-embed">
+              <iframe
+                title={latest.title}
+                src={`https://www.youtube.com/embed/${latest.id}`}
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              ></iframe>
             </div>
-          ) : (
-            <a className="blog-card" href={CHANNEL_URL} target="_blank" rel="noopener noreferrer">
-              <div className="blog-icon animated-icon">{React.createElement(FaYoutube as any)}</div>
-              <div className="blog-info animated-text">
-                <h3 className="blog-title">Visit channel</h3>
-                <p className="blog-description">Open the channel page to view latest videos and playlists.</p>
-                <span className="blog-platform">YouTube</span>
-              </div>
-            </a>
-          )}
+          </div>
         </div>
 
         <aside className="suggested-column">
@@ -153,7 +76,7 @@ const Youtube: React.FC = () => {
                   : `https://picsum.photos/seed/${encodeURIComponent(sugg.title)}/160/90`;
                 return (
                   <a key={i} href={sugg.url} className="suggested-item" target="_blank" rel="noopener noreferrer">
-                    <div className="suggested-thumb"><img src={thumb} alt={sugg.title} /></div>
+                    <div className="suggested-thumb"><img src={thumb} alt={sugg.title} loading="lazy" decoding="async" /></div>
                     <div className="suggested-meta"><div className="suggested-title">{sugg.title}</div></div>
                   </a>
                 );
@@ -172,7 +95,7 @@ const Youtube: React.FC = () => {
             <div className="highlight-label">Videos Created</div>
           </div>
           <div className="highlight-card">
-            <div className="highlight-number">100K+</div>
+            <div className="highlight-number">180K+</div>
             <div className="highlight-label">Total Views</div>
           </div>
           <div className="highlight-card">

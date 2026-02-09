@@ -1,5 +1,5 @@
 .projects-container {
-  padding: 120px 20px;
+  padding: 80px 20px 60px 20px;
   background-color: #141414;
   color: #fff;
 }
@@ -34,7 +34,7 @@
   margin-right: auto;
 }
 
-.toggle-slider-container {
+.projects-container .toggle-slider-container {
   display: flex;
   background: #232323;
   border-radius: 50px;
@@ -47,7 +47,7 @@
   max-width: 600px;
 }
 
-.toggle-slider-container button {
+.projects-container .toggle-slider-container button {
   background: transparent;
   color: #fff;
   border: none;
@@ -65,19 +65,19 @@
   outline: none;
 }
 
-.toggle-slider-container button:first-child {
+.projects-container .toggle-slider-container button:first-child {
   border-radius: 50px 0 0 50px;
 }
 
-.toggle-slider-container button:last-child {
+.projects-container .toggle-slider-container button:last-child {
   border-radius: 0 50px 50px 0;
 }
 
-.toggle-slider-container button:hover {
+.projects-container .toggle-slider-container button:hover {
   color: #fff;
 }
 
-.toggle-slider {
+.projects-container .toggle-slider {
   position: absolute;
   top: 0;
   left: 0;
@@ -91,11 +91,11 @@
 }
 
 /* Slider positions for different states */
-.toggle-slider-container.all .toggle-slider {
+.projects-container .toggle-slider-container.all .toggle-slider {
   left: 33.333%;
 }
 
-.toggle-slider-container.professional .toggle-slider {
+.projects-container .toggle-slider-container.professional .toggle-slider {
   left: 66.666%;
 }
 
@@ -134,6 +134,10 @@
   object-fit: cover;
   border-bottom: 2px solid #e50914;
   transition: transform 0.3s ease;
+}
+
+.project-image.github-og {
+  object-position: left center;
 }
 
 .project-card:hover .project-image {

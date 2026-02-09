@@ -1,7 +1,7 @@
 .app-footer {
   background-color: rgba(0, 0, 0, 0.9);
   padding: 1.5rem 5rem; /* padding on both sides */
-  margin-top: 6rem;
+  margin-top: 2rem;
   margin-bottom: 0;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   display: flex;
@@ -104,7 +104,7 @@
 @media (max-width: 480px) {
   .app-footer {
     padding: 1.5rem 1rem;
-    margin-top: 3rem;
+    margin-top: 2rem;
   }
 
   .footer-text {

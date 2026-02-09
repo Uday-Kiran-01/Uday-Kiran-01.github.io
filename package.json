@@ -19,6 +19,7 @@
     "postinstall": "node scripts/patch-fs-constants.js",
     "start": "react-scripts --openssl-legacy-provider start",
     "build": "react-scripts build",
+    "optimize-images": "node optimize-images.js --in-place",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

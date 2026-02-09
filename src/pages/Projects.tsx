@@ -4,6 +4,8 @@ import { FaReact, FaNodeJs, FaAws, FaDatabase, FaDocker, FaAngular, FaGithub, Fa
 import { SiRubyonrails, SiPostgresql, SiMongodb, SiMaterialdesign, SiHtml5, SiCss3, SiJquery, SiAwsamplify, SiFirebase, SiTerraform, SiArgo } from 'react-icons/si';
 import { projectsData } from '../data/staticData';
 import { GrDeploy, GrKubernetes } from "react-icons/gr";
+import type { Project } from '../types';
+import fallbackProjectImage from '../images/grey.png';
 
 const techIcons: { [key: string]: JSX.Element } = {
   "ReactJS": <FaReact />,
@@ -62,6 +64,44 @@ const techIcons: { [key: string]: JSX.Element } = {
   'JavaScript': <FaReact />,
   'Apache Kafka': <FaDatabase />
 };
+
+function getGitHubOpenGraphImageUrl(githubUrl: string): string | null {
+  // Expected shapes:
+  // - https://github.com/owner/repo
+  // - https://github.com/owner/repo/
+  // - https://github.com/owner/repo/issues/123
+  // - git@github.com:owner/repo.git
+  try {
+    const trimmed = githubUrl.trim();
+    if (!trimmed) return null;
+
+    if (trimmed.startsWith('git@github.com:')) {
+      const rest = trimmed.replace('git@github.com:', '').replace(/\.git$/i, '');
+      const [owner, repo] = rest.split('/');
+      if (!owner || !repo) return null;
+      return `https://opengraph.githubassets.com/1/${owner}/${repo}`;
+    }
+
+    const url = new URL(trimmed);
+    if (url.hostname !== 'github.com') return null;
+
+    const parts = url.pathname.split('/').filter(Boolean);
+    const owner = parts[0];
+    const repo = parts[1]?.replace(/\.git$/i, '');
+    if (!owner || !repo) return null;
+    return `https://opengraph.githubassets.com/1/${owner}/${repo}`;
+  } catch {
+    return null;
+  }
+}
+
+function getProjectImageSrc(project: Project): string {
+  const direct = project.image?.url?.trim();
+  if (direct) return direct;
+  const gh = project.githubLink?.trim();
+  const ghImg = gh ? getGitHubOpenGraphImageUrl(gh) : null;
+  return ghImg || fallbackProjectImage;
+}
 
 const Projects: React.FC = () => {
   const [statusFilter, setStatusFilter] = useState<'personal' | 'all' | 'professional'>('all');
@@ -122,7 +162,25 @@ const Projects: React.FC = () => {
                 </span>
               )}
             </div>
-            <img src={project.image.url} alt={project.title} className="project-image" />
+            {(() => {
+              const src = getProjectImageSrc(project as Project);
+              const isGitHubOg = src.includes('opengraph.githubassets.com/');
+              return (
+                <img
+                  src={src}
+                  alt={project.title}
+                  className={`project-image${isGitHubOg ? ' github-og' : ''}`}
+              loading="lazy"
+              decoding="async"
+              onError={(e) => {
+                const img = e.currentTarget;
+                if (img.dataset.fallbackApplied === 'true') return;
+                img.dataset.fallbackApplied = 'true';
+                img.src = fallbackProjectImage;
+              }}
+                />
+              );
+            })()}
             <div className="project-details">
               <h3>{project.title}</h3>
               <p>{project.description}</p>

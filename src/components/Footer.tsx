@@ -30,7 +30,9 @@ const Footer: React.FC = () => {
         // if the badge script didn't create children, show fallback after short delay
         setTimeout(() => {
           const hasChildren = wcb.children && wcb.children.length > 0;
-          setShowFallback(!hasChildren);
+          const text = (wcb.textContent || '').toLowerCase();
+          const hasNoResult = text.includes('no result');
+          setShowFallback(!hasChildren || hasNoResult);
         }, 900);
       } else {
         setShowFallback(true);
@@ -43,8 +45,6 @@ const Footer: React.FC = () => {
     return () => window.removeEventListener('focus', checkBadge);
   }, []);
 
-  const currentYear = new Date().getFullYear();
-
   return (
     <footer className="app-footer">
       <div className="footer-content">
@@ -53,7 +53,12 @@ const Footer: React.FC = () => {
         </div>
 
         <div className="footer-right footer-section carbon-section">
-          <div id="wcb" className="carbonbadge wcb-d" aria-hidden={showFallback}></div>
+          <div
+            id="wcb"
+            className="carbonbadge wcb-d"
+            aria-hidden={showFallback}
+            style={showFallback ? { display: 'none' } : undefined}
+          ></div>
           {showFallback && (
             <div className="carbon-fallback">
               <a href="https://www.websitecarbon.com/" target="_blank" rel="noreferrer">Website Carbon</a>

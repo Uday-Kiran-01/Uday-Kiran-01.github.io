@@ -78,7 +78,7 @@ const ContinueWatching: React.FC<ContinueWatchingProps> = ({ profile }) => {
   const title = `Continue Watching for ${profileDisplayNames[profile]}`;
 
   return (
-    <div className="continue-watching-row">
+    <div className={`continue-watching-row continue-watching-row--${profile}`}>
       <h2 className="row-title">{title}</h2>
       <div className="row-container">
         {shouldShowArrows && showLeftArrow && (

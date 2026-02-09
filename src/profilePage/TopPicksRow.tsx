@@ -57,7 +57,6 @@ const TopPicksRow: React.FC<TopPicksRowProps> = ({ profile }) => {
   const navigate = useNavigate();
   const topPicks = topPicksConfig[profile];
   const rowRef = useRef<HTMLDivElement>(null);
-  const [showLeftArrow, setShowLeftArrow] = useState(false);
 
   const profileDisplayNames: Record<ProfileType, string> = {
     recruiter: 'Recruiter',
@@ -86,14 +85,11 @@ const TopPicksRow: React.FC<TopPicksRowProps> = ({ profile }) => {
         const overflows = el.scrollWidth > el.clientWidth + 2; // small tolerance
         if (!overflows) {
           setVisibleArrow('none');
-          setShowLeftArrow(false);
           return;
         }
 
         const canScrollLeft = el.scrollLeft > 5;
         const canScrollRight = el.scrollLeft < el.scrollWidth - el.clientWidth - 5;
-
-        setShowLeftArrow(canScrollLeft);
 
         if (canScrollLeft && !canScrollRight) setVisibleArrow('left');
         else if (!canScrollLeft && canScrollRight) setVisibleArrow('right');
@@ -134,7 +130,6 @@ const TopPicksRow: React.FC<TopPicksRowProps> = ({ profile }) => {
       // compute expected post-scroll visibility immediately so UI updates promptly
       const willCanScrollLeft = target > 5;
       const willCanScrollRight = target < el.scrollWidth - el.clientWidth - 5;
-      setShowLeftArrow(willCanScrollLeft);
       if (willCanScrollLeft && !willCanScrollRight) setVisibleArrow('left');
       else if (!willCanScrollLeft && willCanScrollRight) setVisibleArrow('right');
       else if (willCanScrollLeft && willCanScrollRight) setVisibleArrow('right');
@@ -146,8 +141,6 @@ const TopPicksRow: React.FC<TopPicksRowProps> = ({ profile }) => {
       setTimeout(() => {
         const canScrollLeft = el.scrollLeft > 5;
         const canScrollRight = el.scrollLeft < el.scrollWidth - el.clientWidth - 5;
-        setShowLeftArrow(canScrollLeft);
-
         if (canScrollLeft && !canScrollRight) setVisibleArrow('left');
         else if (!canScrollLeft && canScrollRight) setVisibleArrow('right');
         else if (canScrollLeft && canScrollRight) setVisibleArrow('right');

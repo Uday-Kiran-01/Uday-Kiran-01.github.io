@@ -8,7 +8,7 @@ export const profileBannerData: ProfileBanner = {
   headline: 'Uday Kiran Yaddanapudi',
   resumeLink: { url: 'https://drive.google.com/file/d/YOUR_RESUME_ID/view' },
   linkedinLink: 'https://www.linkedin.com/in/udaykiranyaddanapudi/',
-  profileSummary: 'Full Stack Developer & AI Data Scientist with expertise in React, Python, Machine Learning and Cloud Computing. Passionate about building scalable web applications and delivering data-driven solutions.',
+profileSummary: 'Data professional with experience in analytics, machine learning, and building scalable data solutions. Proven ability to develop models, optimize data pipelines, and deliver actionable insights that improve system performance and support business decision-making.',
   googleScholarLink: 'https://scholar.google.com/citations?user=O1TUuP8AAAAJ',
 };
 

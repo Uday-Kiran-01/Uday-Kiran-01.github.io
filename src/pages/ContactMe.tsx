@@ -2,12 +2,13 @@ import React from 'react';
 import './ContactMe.css';
 import { FaPaperPlane, FaFileDownload, FaLinkedin, FaGithub, FaGoogle } from 'react-icons/fa';
 import { ContactMe as IContactMe } from '../types';
+import myProfileImage from '../images/my_image.jpg';
 
 // fallback placeholder (external reliable image)
 const PLACEHOLDER_IMAGE = 'https://via.placeholder.com/520x420?text=Uday+Kiran';
 
-// use a neutral placeholder for profile image (avoid bundling personal images)
-const BUNDLED_PROFILE = PLACEHOLDER_IMAGE;
+// use bundled profile image as primary source
+const BUNDLED_PROFILE = myProfileImage;
 
 const userData: IContactMe = {
   profilePicture: { url: BUNDLED_PROFILE },
@@ -19,8 +20,8 @@ const userData: IContactMe = {
   email: 'yvssrr.udaykiran@gmail.com',
   phoneNumber: '+44 7XXX XXXXXX',
   resumeLink: '/resume.pdf',
-  githubLink: 'https://github.com/your-username',
-  googleScholarLink: 'https://scholar.google.com/citations?user=YOUR_ID',
+  githubLink: 'https://github.com/Uday-Kiran-01',
+  googleScholarLink: 'https://scholar.google.com/citations?user=O1TUuP8AAAAJ',
 };
 
 const ContactMe: React.FC = () => {

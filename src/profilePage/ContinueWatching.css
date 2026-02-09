@@ -1,21 +1,36 @@
 .continue-watching-row {
-  padding: 20px;
+  /* tighter top spacing so the section sits higher */
+  padding: 0 20px 20px;
+  margin-top: -12px;
   color: #fff;
-  margin-bottom: 20px;
+  margin-bottom: -56px;
+}
+
+/* Apply consistent gap below Top Picks for all profiles */
+.continue-watching-row.continue-watching-row--recruiter,
+.continue-watching-row.continue-watching-row--developer,
+.continue-watching-row.continue-watching-row--stalker,
+.continue-watching-row.continue-watching-row--adventure {
+  margin-top: 10px;
+}
+
+/* Only on Recruiter profile page: add extra gap before footer */
+.continue-watching-row.continue-watching-row--recruiter {
+  margin-bottom: 32px;
 }
 
 .continue-watching-row:hover {
- cursor: pointer;
+  cursor: pointer;
 }
 
-.row-title {
+.continue-watching-row .row-title {
   font-size: 1.5rem;
   margin-bottom: 10px;
 }
 
-.row-header { display:flex; align-items:center; justify-content:space-between; gap:12px; }
+.continue-watching-row .row-header { display:flex; align-items:center; justify-content:space-between; gap:12px; }
 
-.card-row {
+.continue-watching-row .card-row {
   display: flex;
   gap: 10px;
   overflow-x: auto;
@@ -23,11 +38,11 @@
   scrollbar-width: none; /* For Firefox */
 }
 
-.card-row::-webkit-scrollbar {
+.continue-watching-row .card-row::-webkit-scrollbar {
   display: none; /* For Chrome, Safari, and Edge */
 }
 
-.pick-card {
+.continue-watching-row .pick-card {
   position: relative;
   min-width: 150px;
   flex: 0 0 auto;
@@ -36,29 +51,29 @@
   transition: transform 0.3s ease;
 }
 
-.pick-card:hover {
+.continue-watching-row .pick-card:hover {
   transform: scale(1.05); /* Slight zoom effect on hover */
 }
 
-.pick-card.disabled {
+.continue-watching-row .pick-card.disabled {
   pointer-events: none;
   opacity: 0.7;
   transform: none !important;
 }
 
-.pick-card.disabled .pick-label {
+.continue-watching-row .pick-card.disabled .pick-label {
   font-style: italic;
   color: #ffd9d9;
 }
 
-.pick-image {
+.continue-watching-row .pick-image {
   width: 100%;
   height: 100%;
   display: block;
   object-fit: cover;
 }
 
-.overlay {
+.continue-watching-row .overlay {
   position: absolute;
   top: 0;
   left: 0;
@@ -72,11 +87,11 @@
   transition: opacity 0.3s ease;
 }
 
-.pick-card:hover .overlay {
+.continue-watching-row .pick-card:hover .overlay {
   opacity: 1;
 }
 
-.pick-label {
+.continue-watching-row .pick-label {
   position: absolute;
   top: 50%;
   left: 50%;

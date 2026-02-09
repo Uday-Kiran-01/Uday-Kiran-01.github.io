@@ -1,5 +1,5 @@
 .top-picks-row {
-  margin: 20px 0;
+  margin: 20px 0 40px;
   padding: 10px 20px
 }
 
@@ -111,6 +111,11 @@
   align-items: center;
   opacity: 0;
   transition: opacity 0.3s ease;
+}
+
+/* Recruiter Top Picks: keep title visible without hover */
+.top-picks-row.recruiter-size .overlay {
+  opacity: 1;
 }
 
 .pick-card:hover .overlay {

@@ -23,7 +23,7 @@
   font-size: 2.5rem;
   color: #e50914;
   font-weight: 700;
-  margin-bottom: 0.8rem;
+  margin-bottom: 1.1rem;
   animation: slideDown 0.7s ease-in-out forwards;
   transform: translateY(-30px);
   opacity: 0;
@@ -38,25 +38,16 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 52px;
-  height: 52px;
-  background: #e50914;
-  color: #fff;
-  border-radius: 8px;
-  font-size: 0;
-  flex: 0 0 52px;
-  position: relative;
+  width: auto;
+  height: auto;
+  background: transparent;
+  color: #e50914;
+  border-radius: 0;
+  font-size: 2.8rem;
+  flex: 0 0 auto;
 }
 
-.youtube-icon::before {
-  content: '';
-  width: 0;
-  height: 0;
-  border-left: 14px solid #fff;
-  border-top: 10px solid transparent;
-  border-bottom: 10px solid transparent;
-  margin-left: 3px;
-}
+.youtube-icon::before { content: none; }
 
 .youtube-text { display: inline-block; line-height: 1.2; }
 
@@ -67,7 +58,7 @@
   max-width: 800px;
   text-align: center;
   animation: fadeIn 1s ease-in-out forwards;
-  transform: translateY(-16px);
+  transform: translateY(0);
   opacity: 0;
 }
 

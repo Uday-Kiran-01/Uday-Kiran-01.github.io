@@ -13,6 +13,10 @@
   border: none;
 }
 
+.profile-card.disabled {
+  cursor: default;
+}
+
 .image-container {
   position: relative;
   width: 150px;
@@ -27,6 +31,15 @@
 .profile-card:hover .image-container {
   transform: translateY(-4px);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+.profile-card.disabled .image-container {
+  opacity: 0.75;
+}
+
+.profile-card.disabled:hover .image-container {
+  transform: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 .profile-image {
@@ -46,6 +59,18 @@
 
 .profile-card:hover .profile-name {
   color: white;
+}
+
+.profile-card.disabled:hover .profile-name {
+  color: #808080;
+}
+
+.profile-subtitle {
+  color: #808080;
+  font-size: 13px;
+  font-weight: 400;
+  margin: 4px 0 0 0;
+  text-align: center;
 }
 
 @media (max-width: 768px) {

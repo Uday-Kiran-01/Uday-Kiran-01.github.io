@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  min-height: 100vh;
   background-color: #141414;
   overflow: hidden;
 }
@@ -54,10 +54,10 @@
 .netflix-container::after {
   content: '';
   position: absolute;
-  top: -10%;
-  left: -40%;
-  width: 60%;
-  height: 120%;
+  top: -20%;
+  left: -80%;
+  width: 160%;
+  height: 140%;
   background: linear-gradient(90deg, rgba(255,0,0,0) 0%, rgba(255,0,0,0.75) 50%, rgba(255,0,0,0) 100%);
   transform: skewX(-25deg) translateX(0);
   mix-blend-mode: screen;
@@ -75,7 +75,7 @@
 
 @keyframes sweep {
   0% {
-    transform: skewX(-25deg) translateX(-10%);
+    transform: skewX(-25deg) translateX(-35%);
     opacity: 0;
   }
   30% {
@@ -85,7 +85,7 @@
     opacity: 1;
   }
   100% {
-    transform: skewX(-25deg) translateX(120%);
+    transform: skewX(-25deg) translateX(160%);
     opacity: 0;
   }
 }

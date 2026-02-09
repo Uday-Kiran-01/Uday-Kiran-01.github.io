@@ -42,12 +42,19 @@ const Browse: React.FC = () => {
       <p className='who-is-watching'>Who's Watching?</p>
       <div className="profiles">
         {profiles.map((profile, index) => (
+          (() => {
+            const isEnabled = profile.name === 'recruiter';
+            return (
           <ProfileCard
             key={index}
             name={profile.name}
             image={profile.image}
-            onClick={() => handleProfileClick(profile)}
+            subtitle={isEnabled ? undefined : 'Coming soon'}
+            disabled={!isEnabled}
+            onClick={isEnabled ? () => handleProfileClick(profile) : undefined}
           />
+            );
+          })()
         ))}
       </div>
     </div>

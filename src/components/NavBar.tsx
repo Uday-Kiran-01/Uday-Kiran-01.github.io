@@ -4,9 +4,6 @@ import { FaHome, FaBriefcase, FaTools, FaProjectDiagram, FaEnvelope } from 'reac
 import './Navbar.css';
 import navbarLogo from '../images/ukfornetflix.png';
 import blueImage from '../images/blue.png';
-import greyImage from '../images/grey.png';
-import redImage from '../images/red.png';
-import yellowImage from '../images/yellow.png';
 
 const Navbar: React.FC = () => {
   const location = useLocation();
@@ -15,7 +12,6 @@ const Navbar: React.FC = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
   const profileImage = location.state?.profileImage || blueImage;
-  const currentProfileName = location.state?.profileName || '';
 
   // determine current profile from router state (if just selected) or persisted selection
   let currentProfile: { name: string; displayName: string; image: string; backgroundGif?: string } | null = null;
@@ -100,7 +96,16 @@ const Navbar: React.FC = () => {
             <div></div>
           </div>
           <div className="profile-wrapper" ref={menuRef}>
-            <img src={profileImage} alt="Profile" className="profile-icon" loading="lazy" decoding="async" onClick={toggleProfileMenu} />
+            <button
+              type="button"
+              className={`profile-trigger ${isProfileMenuOpen ? 'open' : ''}`}
+              onClick={toggleProfileMenu}
+              aria-haspopup="menu"
+              aria-expanded={isProfileMenuOpen}
+              aria-label="Open profile menu"
+            >
+              <img src={profileImage} alt="Profile" className="profile-icon" loading="lazy" decoding="async" />
+            </button>
 
             {isProfileMenuOpen && (
               <div className="profile-menu" role="menu" aria-label="Profile menu">
@@ -132,7 +137,7 @@ const Navbar: React.FC = () => {
                     setIsProfileMenuOpen(false);
                     navigate('/');
                   }}>
-                    Sign out of Netflix
+                    Sign out of Portfolio
                   </li>
                 </ul>
               </div>

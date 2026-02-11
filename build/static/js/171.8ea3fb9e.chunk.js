@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunknetflix_portfolio=self.webpackChunknetflix_portfolio||[]).push([[171],{171(i,e,s){s.r(e),s.d(e,{default:()=>n});s(43);var c=s(579);const n=()=>(0,c.jsx)("div",{className:"certifications-container",children:(0,c.jsxs)("div",{className:"certifications-empty",children:[(0,c.jsx)("h2",{children:"Certifications"}),(0,c.jsx)("p",{children:"Coming Soon"})]})})}}]);
+//# sourceMappingURL=171.8ea3fb9e.chunk.js.map

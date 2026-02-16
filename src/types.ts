@@ -25,6 +25,7 @@ export interface TimelineItem {
   techStack: string;
   logo?: string;
   summaryPoints: string[];
+  modalDetails?: string[];
   dateRange: string;
 }
 

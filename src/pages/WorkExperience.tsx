@@ -191,7 +191,7 @@ const WorkExperience: React.FC = () => {
               <div className="modal-details">
                 <h4>Key Responsibilities & Achievements:</h4>
                 <ul>
-                  {timeLineData[modalOpen].summaryPoints.map((pt: any, i: number) => (
+                  {(timeLineData[modalOpen].modalDetails ?? timeLineData[modalOpen].summaryPoints).map((pt: any, i: number) => (
                     <li key={i}>{pt}</li>
                   ))}
                 </ul>
